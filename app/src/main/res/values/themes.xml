@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ShoppingAssistant" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/navy</item>
+        <item name="colorPrimaryVariant">@color/navy</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.ShoppingAssistant.Link">
+        <item name="android:textColor">@color/sys_link</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Theme.ShoppingAssistant.Text">
+        <item name="android:textColor">@color/sys_text</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+</resources>

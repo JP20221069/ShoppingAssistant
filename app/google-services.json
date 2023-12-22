@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "908346635002",
+    "firebase_url": "https://shoppingassistant-55939-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "shoppingassistant-55939",
+    "storage_bucket": "shoppingassistant-55939.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908346635002:android:bb80c95e883f3f6f0e4f43",
+        "android_client_info": {
+          "package_name": "com.jspj.shoppingassistant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA9T4Rdhui8UQJt-tiAf774oWKQ9M5t_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
