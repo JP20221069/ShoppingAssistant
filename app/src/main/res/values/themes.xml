@@ -17,4 +17,17 @@
         <item name="android:textColor">@color/sys_text</item>
         <item name="android:textSize">16dp</item>
     </style>
+
+    <style name="Theme.ShoppingAssistant.Button">
+        <item name="android:textColor">@color/sys_text</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:colorPrimary">@color/sys_control</item>
+        <item name="android:textAppearance">@id/dialog_button</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.ShoppingAssistant.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/sys_text</item>
+        <item name="android:textSize">16dp</item>
+    </style>
 </resources>

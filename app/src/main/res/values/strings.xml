@@ -6,7 +6,12 @@
     <string name="login_en">Log in</string>
     <string name="signup_en">Sign up</string>
     <string name="greeting_en">Welcome to Shopping Assistant!</string>
+    <string name="newuser_message_en">Create your Shopping Assistant account!</string>
     <string name="dha_en">Don\'t have an account?</string>
     <string name="username_en">Username</string>
     <string name="password_en">Password</string>
+    <string name="repass_en">Repeat Password</string>
+    <string name="lists_en">My shopping lists</string>
+    <string name="products_en">Available products</string>
+    <string name="stores_en">Available stores</string>
 </resources>

@@ -12,11 +12,10 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="176dp"
-        android:text="TextView"
+        android:text="@string/username_en"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/username_en" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -111,6 +110,7 @@
 
     <Button
         android:id="@+id/btnLogin"
+        style="@style/Theme.ShoppingAssistant.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="307dp"

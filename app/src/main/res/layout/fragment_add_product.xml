@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentAddProduct" >
+
+    <NumberPicker
+        android:id="@+id/npAmount"
+        style="@android:style/Widget.Material.NumberPicker"
+        android:layout_width="76dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="8dp"
+        android:solidColor="@color/sys_background"
+        android:theme="@style/Theme.ShoppingAssistant.Picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twTitle" />
+
+    <TextView
+        android:id="@+id/twTitle"
+        style="@style/Theme.ShoppingAssistant.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="16dp"
+        android:text="SELECT A PRODUCT"
+        android:textColor="@color/sys_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twLBAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="88dp"
+        android:text="AMOUNT:"
+        android:textColor="@color/sys_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rwProducts"
+        android:layout_width="412dp"
+        android:layout_height="576dp"
+        android:layout_marginTop="156dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="5"
+        tools:listitem="@layout/card_view_design">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/npAmount" />
+
+    <Button
+        android:id="@+id/btConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="34dp"
+        android:text="CONFIRM"
+        app:layout_constraintStart_toEndOf="@+id/npAmount"
+        app:layout_constraintTop_toBottomOf="@+id/twTitle"
+        android:theme="@style/Theme.ShoppingAssistant.Button"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

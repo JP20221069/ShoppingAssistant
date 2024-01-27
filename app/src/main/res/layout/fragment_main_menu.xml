@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/ib1"
+        android:id="@+id/ibLists"
         android:layout_width="112dp"
         android:layout_height="109dp"
         android:layout_marginStart="44dp"
@@ -49,11 +49,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/ib2"
+        android:id="@+id/ibProducts"
         android:layout_width="112dp"
         android:layout_height="109dp"
         android:layout_marginStart="226dp"
         android:layout_marginTop="130dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/product"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib3"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="280dp"
         android:scaleType="fitXY"
         android:src="@drawable/product"
         app:layout_constraintStart_toStartOf="parent"
