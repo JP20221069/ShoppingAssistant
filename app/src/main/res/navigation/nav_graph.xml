@@ -56,6 +56,10 @@
             android:id="@+id/action_listsViewFragment_to_shoppingListFragment"
             app:destination="@id/shoppingListFragment"
             app:popUpTo="@id/listsViewFragment" />
+        <action
+            android:id="@+id/action_listsViewFragment_to_addListFragment"
+            app:destination="@id/addListFragment"
+            app:popUpTo="@id/listsViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoppingListFragment"
@@ -81,5 +85,14 @@
         <action
             android:id="@+id/action_fragmentAddProduct_to_shoppingListFragment"
             app:destination="@id/shoppingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addListFragment"
+        android:name="com.jspj.shoppingassistant.AddListFragment"
+        android:label="fragment_add_list"
+        tools:layout="@layout/fragment_add_list" >
+        <action
+            android:id="@+id/action_addListFragment_to_listsViewFragment"
+            app:destination="@id/listsViewFragment" />
     </fragment>
 </navigation>

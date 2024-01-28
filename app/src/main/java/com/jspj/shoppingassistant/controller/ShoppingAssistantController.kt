@@ -153,7 +153,7 @@ class ShoppingAssistantController()
             }
             else
             {
-                null
+                return null
             }
         }
         catch (e: DatabaseException)
@@ -188,7 +188,14 @@ class ShoppingAssistantController()
         return try {
             val databaseReference: DatabaseReference = DBinstance.getReference("LISTS/"+userID)
             val snapshot: DataSnapshot = databaseReference.orderByKey().limitToLast(1).get().await()
-            return snapshot.children.first().key!!;
+
+            if(snapshot.hasChildren()) {
+                return snapshot.children.first().key!!;
+            }
+            else
+            {
+                return "0";
+            }
 
         }
         catch (e: DatabaseException) {
@@ -213,9 +220,26 @@ class ShoppingAssistantController()
     suspend fun insertList(l:ShoppingList)
     {
         val ref = DBinstance.getReference().child("LISTS/"+getUID())
-        val lists = mutableMapOf<String,ShoppingList>();
+        val itemsMapList = l.Products?.map { item ->
+            mapOf(
+                "Product" to item.Product?.ID,
+                "Amount" to item.Amount,
+                "Notes" to item.Notes,
+                "Checked" to item.Checked
+            )
+        }
+
+        val updatedMap: Map<String, Any?> = mapOf(
+            "Items" to itemsMapList,
+            "Name" to l.Name,
+            "Store" to l.Store?.ID
+        )
+
         val newid = getLastListIDByUser(getUID()!!).toInt()+1;
-        lists.put(newid.toString(),l);
+        val insertMap: Map<String,Any?> = mapOf(
+            newid.toString() to updatedMap
+        )
+        ref.child(newid.toString()).setValue(updatedMap);
     }
 
     suspend fun updateList(l:ShoppingList) : Boolean
@@ -239,6 +263,22 @@ class ShoppingAssistantController()
 
             ref.updateChildren(updatedMap).await();
 
+            true
+        } catch (e: DatabaseException) {
+            // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
+            false
+        }
+    }
+
+    suspend fun deleteList(l:ShoppingList): Boolean {
+        return try {
+            val ref = DBinstance.getReference().child("LISTS/"+getUID()+"/"+l.ID);
+
+            // Use removeValue() to delete the list
+            ref.removeValue().await()
+
+            // Deletion successful
             true
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
