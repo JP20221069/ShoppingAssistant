@@ -34,7 +34,10 @@ class ListItemViewFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var navController: NavController;
     private lateinit var binding: FragmentListItemViewBinding;
-
+    private val args: ListItemViewFragmentArgs by navArgs()
+    private var List:ShoppingList?=null;
+    private var ItemPrice:Float=0.00f;
+    private var hasbeenchanged:Boolean=false;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -50,7 +53,95 @@ class ListItemViewFragment : Fragment() {
         binding = FragmentListItemViewBinding.inflate(inflater, container, false)
         return binding.root;
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        var listid = args.SHLISTID;
+        var i = args.ITEMID;
+        var TH: ToastHandler = ToastHandler(requireContext());
+        lifecycleScope.launch(Dispatchers.Main)
+        {
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            List = ctrl.getList(ctrl.getUID()!!, args.SHLISTID);
+            var item = List?.Products?.get(args.ITEMID);
+            if (item != null) {
+                binding.twTitle.text = item.Product?.Name
+                val price = ctrl.getPriceForProduct(
+                    item.Product?.ID.toString(),
+                    List?.Store?.ID.toString()
+                )?.Price;
+                ItemPrice=price!!;
+                binding.twPrice.text = price.toString();
+                binding.twAmount.text = item.Amount.toString();
+                if (price != null) {
+                    binding.twTotal.text = (price * item.Amount).toString()
+                }
+                binding.txtNotes.setText(item.Notes, TextView.BufferType.EDITABLE)
+                UpdateUI()
+            }
+        }
+        binding.btMinus.setOnClickListener {
+            if(List?.Products?.get(i)?.Amount!! >1)
+            {
+                List!!.Products?.get(i)?.Amount = List!!.Products!![i]?.Amount?.minus(1)!!;
+                hasbeenchanged=true;
+                UpdateUI()
+            }
+            else
+            {
+                TH.showToast("Cannot lower amount more than one.", Toast.LENGTH_SHORT);
+            }
+        }
 
+        binding.btPlus.setOnClickListener {
+            List!!.Products?.get(i)?.Amount = List!!.Products!![i]?.Amount?.plus(1)!!;
+            hasbeenchanged=true;
+            UpdateUI()
+        }
+        binding.ibChk.setOnClickListener {
+            List!!.Products?.get(i)?.Checked=true;
+            hasbeenchanged=true;
+            UpdateUI();
+        }
+        binding.ibUnChk.setOnClickListener {
+            List!!.Products?.get(i)?.Checked=false;
+            hasbeenchanged=true;
+            UpdateUI();
+        }
+
+        binding.btAccept.setOnClickListener {
+            if(binding.txtNotes.text.toString()!=List!!.Products?.get(i)?.Notes)
+            {
+                List!!.Products?.get(i)?.Notes=binding.txtNotes.text.toString();
+                hasbeenchanged=true;
+            }
+            if(hasbeenchanged)
+            {
+                var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+                lifecycleScope.launch(Dispatchers.Main) {
+                    ctrl.updateList(List!!);
+                    var dir = ListItemViewFragmentDirections.actionListItemViewFragmentToShoppingListFragment(listid);
+                    navController.navigate(dir);
+                }
+                TH.showToast("Updated item.",Toast.LENGTH_SHORT);
+            }
+        }
+    }
+
+
+    private fun UpdateUI(){
+        val item = List?.Products?.get(args.ITEMID);
+        if (item != null) {
+            if(item.Checked) {
+                binding.iwChk.visibility=View.VISIBLE;
+            } else {
+                binding.iwChk.visibility=View.INVISIBLE;
+            }
+        }
+        binding.twPrice.text = ItemPrice.toString();
+        binding.twAmount.text = item?.Amount.toString();
+        binding.twTotal.text = (ItemPrice * item?.Amount!!).toString()
+    }
 
 
     companion object {

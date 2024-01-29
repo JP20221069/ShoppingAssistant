@@ -6,6 +6,209 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListItemViewFragment" >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvtbNotes"
+        android:layout_width="405dp"
+        android:layout_height="450dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="236dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:boxBackgroundMode="none"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNotes"
+                android:layout_width="match_parent"
+                android:layout_height="557dp"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                android:textColor="@color/sys_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/twTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="16dp"
+        android:text="ITEM NAME"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="88dp"
+        android:text="999,99"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Price"
+        android:textColor="@color/forest_green"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="148dp"
+        android:text="999,99"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Price"
+        android:textColor="@color/forest_green"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twlbTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="148dp"
+        android:text="TOTAL:"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twlbPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="88dp"
+        android:text="PRICE:"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twlbAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="116dp"
+        android:text="AMOUNT:"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="116dp"
+        android:text="100"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Price"
+        android:textColor="@color/navy"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="208dp"
+        android:text="NOTES:"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btPlus"
+        style="@style/Theme.ShoppingAssistant.Button"
+        android:layout_width="58dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="116dp"
+        android:backgroundTint="@color/green"
+        android:fontFamily="sans-serif-black"
+        android:text="+"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Button"
+        android:textColor="@color/sys_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btMinus"
+        style="@style/Theme.ShoppingAssistant.Button"
+        android:layout_width="58dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="176dp"
+        android:backgroundTint="@color/red"
+        android:fontFamily="sans-serif-black"
+        android:text="-"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Button"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="684dp"
+        android:text="ACCEPT"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iwChk"
+        android:layout_width="21dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/check"
+        android:visibility="visible"/>
+
+    <ImageButton
+        android:id="@+id/ibChk"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="176dp"
+        android:src="@drawable/checkproduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibUnChk"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="176dp"
+        android:src="@drawable/uncheckproduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
