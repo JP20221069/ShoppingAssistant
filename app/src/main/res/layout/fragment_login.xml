@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:singleLine="true"
                 android:textColor="@color/sys_text"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp" />
@@ -80,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:singleLine="true"
                 android:textColor="@color/sys_text"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp" />

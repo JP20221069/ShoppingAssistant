@@ -7,27 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".ShoppingListFragment">
 
+    <ImageButton
+        android:id="@+id/ibSearch"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/magnifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rwShoppingList"
-        android:layout_width="413dp"
-        android:layout_height="605dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="408dp"
+        android:layout_height="586dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/card_view_design" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/twTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
         android:layout_marginTop="5dp"
         android:text="MY TEST LIST"
         android:textAlignment="center"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="@style/Theme.ShoppingAssistant.Text"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twPrice"
+        android:layout_width="154dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="672dp"
+        android:text="1234,99"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Price"
+        android:textColor="@color/forest_green"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/ibAddProduct"
@@ -101,5 +126,15 @@
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <ImageView
+        android:id="@+id/iwCart"
+        android:layout_width="118dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/financial512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rwShoppingList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

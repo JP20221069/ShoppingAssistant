@@ -1,13 +1,17 @@
 package com.jspj.shoppingassistant
 
-import com.jspj.shoppingassistant.model.ItemsViewModel
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.os.Looper
-import androidx.fragment.app.Fragment
+import android.text.InputType
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,17 +20,12 @@ import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.adapter.CustomAdapter
 import com.jspj.shoppingassistant.controller.ShoppingAssistantController
 import com.jspj.shoppingassistant.databinding.FragmentProductBinding
-import com.jspj.shoppingassistant.model.Price
+import com.jspj.shoppingassistant.model.ItemsViewModel
 import com.jspj.shoppingassistant.model.Product
 import com.jspj.shoppingassistant.model.ShoppingList
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newFixedThreadPoolContext
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.CoroutineContext
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +40,8 @@ private const val ARG_PARAM2 = "param2"
 class ProductFragment : Fragment() {
     private lateinit var binding: FragmentProductBinding
     private lateinit var navController: NavController
-
+    private lateinit var searchCriteria:String;
+    private lateinit var ProductList:List<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,25 +62,14 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Init();
+
         val recyclerview = binding.recyclerview;
         val TH : ToastHandler = ToastHandler(requireContext());
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(context)
         var products:List<Product> = ArrayList();
         val ctrl: ShoppingAssistantController = ShoppingAssistantController()
-        lifecycleScope.launch(Dispatchers.Main) {
-            products = ctrl.getProducts()
-            var data:ArrayList<ItemsViewModel> = arrayListOf();
-            for(p in products)
-            {
-                data.add(ItemsViewModel(R.drawable.product,p.ID.toString()+" "+p.Name,p.ID.toString()))
-            }
-            // This will pass the ArrayList to our Adapter
-            val adapter = CustomAdapter(data)
-            recyclerview.adapter = adapter
-            navController= Navigation.findNavController(view)
-        }
-
+        UpdateData()
 
         binding.bttest.setOnClickListener{
             val ctrl:ShoppingAssistantController = ShoppingAssistantController();
@@ -97,11 +86,70 @@ class ProductFragment : Fragment() {
 
 
         }
-        /*binding.btntestprod.setOnClickListener{
-            val ctrl:ShoppingAssistantController = ShoppingAssistantController()
-            var test = Product(0,"Test","N/A.");
-            ctrl.insertProduct(test);
-        }*/
+
+        binding.btFind.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle("Search").setIcon(R.drawable.search)
+            val input = EditText(requireContext());
+            input.setTextColor(resources.getColor(R.color.sys_text));
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+            builder.show()
+        }
+
+        binding.btRemoveFilter.setOnClickListener{
+            FilterData(true);
+        }
+    }
+
+    private fun UpdateData()
+    {
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        var TH:ToastHandler = ToastHandler(requireContext())
+        var recyclerView = binding.recyclerview;
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        lifecycleScope.launch(Dispatchers.Main) {
+            var products:List<Product> = ctrl.getProducts();
+            ProductList=products;
+            var data:ArrayList<ItemsViewModel> = arrayListOf();
+            for(p in products)
+            {
+                data.add(ItemsViewModel(R.drawable.product,p.Name, p.ID.toString()))
+            }
+            var adapter = CustomAdapter(data)
+            adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
+                override fun onClick(position: Int, model: ItemsViewModel) {
+
+                }
+            })
+
+            recyclerView.adapter=adapter;
+        }
+    }
+
+    private fun FilterData(removeFilter:Boolean=false)
+    {
+        var recyclerView = binding.recyclerview;
+        var data:ArrayList<ItemsViewModel> = arrayListOf();
+        for(p in ProductList)
+        {
+            if(p.Name.contains(searchCriteria) || removeFilter==true)
+            {
+                data.add(ItemsViewModel(R.drawable.product,p.Name,p.ID.toString()))
+            }
+        }
+        var adapter = CustomAdapter(data);
+        adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
+            override fun onClick(position: Int, model: ItemsViewModel) {
+
+            }
+        })
+
+        recyclerView.adapter=adapter;
     }
 
     companion object {

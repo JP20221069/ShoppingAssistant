@@ -3,10 +3,12 @@ package com.jspj.shoppingassistant
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -40,6 +42,7 @@ class ListsViewFragment : Fragment() {
     private lateinit var Lists:MutableList<ShoppingList>
     private var selectmode : Boolean=false;
     private var SelectedItems:MutableList<Int> = mutableListOf();
+    private var searchCriteria="";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,23 +58,6 @@ class ListsViewFragment : Fragment() {
         binding = FragmentListsViewBinding.inflate(inflater, container, false)
         return binding.root;
     }
-
-    private fun UpdateUI()
-    {
-
-        if(selectmode==true)
-        {
-            binding.ibRemoveList.visibility=View.VISIBLE;
-            binding.ibAddList.visibility=View.INVISIBLE;
-        }
-        else
-        {
-
-            binding.ibAddList.visibility=View.VISIBLE;
-            binding.ibRemoveList.visibility=View.INVISIBLE;
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController= Navigation.findNavController(view)
@@ -100,6 +86,7 @@ class ListsViewFragment : Fragment() {
                                     UpdateData()
                                     selectmode=false;
                                     UpdateUI()
+                                    FilterData()
                                 }
 
 
@@ -113,6 +100,21 @@ class ListsViewFragment : Fragment() {
                 .setNegativeButton("No", dialogClickListener).setTitle("Question").setIcon(R.drawable.question).show()
         }
 
+
+        binding.ibSearch.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle("Search").setIcon(R.drawable.magnifier)
+            val input = EditText(requireContext());
+            input.setTextColor(resources.getColor(R.color.sys_text));
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
+            builder.setNeutralButton("Remove filter",DialogInterface.OnClickListener{dialog,which->FilterData(true)})
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+            builder.show()
+        }
 
 
     }
@@ -132,54 +134,93 @@ class ListsViewFragment : Fragment() {
             {
                 data.add(ItemsViewModel(R.drawable.onelist,p.Name,p.ID.toString()))
             }
-            var adapter = CustomAdapter(data)
-            adapter.setOnLongClickListener(object:CustomAdapter.OnLongClickListener{
-                override fun onLongClick(position: Int, model: ItemsViewModel) : Boolean
-                {
+            SetAdapter(data);
+        }
+    }
 
-                    selectmode=true;
-                    for(item in SelectedItems)
-                    {
-                        updateCardBackgroundColor(item, R.color.sys_background)
-                    }
-                    SelectedItems.clear()
-                    UpdateUI();
-                    if(SelectedItems.contains(position)==false)
-                    {
-                        updateCardBackgroundColor(position,R.color.sys_selection)
-                        SelectedItems.add(position);
-                    }
-                    return true;
+    private fun FilterData(removeFilter:Boolean=false)
+    {
+            var data: ArrayList<ItemsViewModel> = arrayListOf();
+            for (p in Lists) {
+                if (p.Name.contains(searchCriteria) || removeFilter == true || searchCriteria=="") {
+                    data.add(ItemsViewModel(R.drawable.onelist, p.Name, p.ID.toString()))
                 }
-            })
-            adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
-                override fun onClick(position: Int, model: ItemsViewModel) {
-                    if(selectmode)
-                    {
-                        if(SelectedItems.contains(position)) {
-                            updateCardBackgroundColor(position,R.color.sys_background);
-                            SelectedItems.remove(position);
-                            if(SelectedItems.size==0)
-                            {
-                                selectmode=false;
-                                UpdateUI();
-                            }
-                        }
-                        else
+            }
+            SetAdapter(data);
+        if(removeFilter)
+        {
+            searchCriteria="";
+        }
+    }
+
+    private fun UpdateUI()
+    {
+        if(selectmode==true)
+        {
+            binding.ibRemoveList.visibility=View.VISIBLE;
+            binding.ibAddList.visibility=View.INVISIBLE;
+            binding.ibSearch.visibility=View.INVISIBLE;
+        }
+        else
+        {
+
+            binding.ibAddList.visibility=View.VISIBLE;
+            binding.ibRemoveList.visibility=View.INVISIBLE;
+            binding.ibSearch.visibility=View.VISIBLE;
+        }
+    }
+
+
+    private fun SetAdapter(data:ArrayList<ItemsViewModel>)
+    {
+        var recyclerView = binding.rwLists;
+        var adapter = CustomAdapter(data)
+        adapter.setOnLongClickListener(object:CustomAdapter.OnLongClickListener{
+            override fun onLongClick(position: Int, model: ItemsViewModel) : Boolean
+            {
+
+                selectmode=true;
+                for(item in SelectedItems)
+                {
+                    updateCardBackgroundColor(item, R.color.sys_background)
+                }
+                SelectedItems.clear()
+                UpdateUI();
+                if(SelectedItems.contains(position)==false)
+                {
+                    updateCardBackgroundColor(position,R.color.sys_selection)
+                    SelectedItems.add(position);
+                }
+                return true;
+            }
+        })
+        adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
+            override fun onClick(position: Int, model: ItemsViewModel) {
+                if(selectmode)
+                {
+                    if(SelectedItems.contains(position)) {
+                        updateCardBackgroundColor(position,R.color.sys_background);
+                        SelectedItems.remove(position);
+                        if(SelectedItems.size==0)
                         {
-                            updateCardBackgroundColor(position,R.color.sys_selection)
-                            SelectedItems.add(position);
+                            selectmode=false;
+                            UpdateUI();
                         }
                     }
                     else
                     {
-                        val directions = ListsViewFragmentDirections.actionListsViewFragmentToShoppingListFragment(model.payload)
-                        navController.navigate(directions);
+                        updateCardBackgroundColor(position,R.color.sys_selection)
+                        SelectedItems.add(position);
                     }
                 }
-            })
-            recyclerView.adapter=adapter;
-        }
+                else
+                {
+                    val directions = ListsViewFragmentDirections.actionListsViewFragmentToShoppingListFragment(model.payload)
+                    navController.navigate(directions);
+                }
+            }
+        })
+        recyclerView.adapter=adapter;
     }
 
     private fun updateCardBackgroundColor(position: Int,color:Int) {

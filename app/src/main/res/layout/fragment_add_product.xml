@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".FragmentAddProduct" >
 
+    <ImageButton
+        android:id="@+id/ibSearch"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="96dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/magnifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <NumberPicker
         android:id="@+id/npAmount"
         style="@android:style/Widget.Material.NumberPicker"
@@ -68,11 +79,11 @@
         android:id="@+id/btConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="36dp"
         android:text="CONFIRM"
+        android:theme="@style/Theme.ShoppingAssistant.Button"
         app:layout_constraintStart_toEndOf="@+id/npAmount"
-        app:layout_constraintTop_toBottomOf="@+id/twTitle"
-        android:theme="@style/Theme.ShoppingAssistant.Button"/>
+        app:layout_constraintTop_toBottomOf="@+id/twTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

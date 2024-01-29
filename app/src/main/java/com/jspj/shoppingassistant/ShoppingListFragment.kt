@@ -1,10 +1,15 @@
 package com.jspj.shoppingassistant
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
+import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -39,11 +44,12 @@ private const val ARG_PARAM2 = "param2"
 class ShoppingListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var navController: NavController;
-    private lateinit var binding:FragmentShoppingListBinding;
+    private lateinit var binding: FragmentShoppingListBinding;
     private lateinit var List: ShoppingList;
-    private lateinit var SelectedItems:MutableList<Int>;
-    private var selectmode : Boolean=false;
-    private val args:ShoppingListFragmentArgs by navArgs()
+    private lateinit var SelectedItems: MutableList<Int>;
+    private var selectmode: Boolean = false;
+    private val args: ShoppingListFragmentArgs by navArgs()
+    private var searchCriteria:String="";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,174 +68,276 @@ class ShoppingListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        navController= Navigation.findNavController(view)
+        navController = Navigation.findNavController(view)
         UpdateUI();
-        SelectedItems= mutableListOf();
+        SelectedItems = mutableListOf();
         super.onViewCreated(view, savedInstanceState)
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
-        var TH:ToastHandler = ToastHandler(requireContext())
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        var TH: ToastHandler = ToastHandler(requireContext())
         UpdateData()
-        binding.ibAddProduct.setOnClickListener{
+        binding.ibAddProduct.setOnClickListener {
 
         }
 
-        binding.ibIncProduct.setOnClickListener{
-            for(i in SelectedItems)
-            {
+        binding.ibIncProduct.setOnClickListener {
+            for (i in SelectedItems) {
                 List.Products?.get(i)?.Amount = List.Products!![i]?.Amount?.plus(1)!!;
             }
-            var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
             lifecycleScope.launch(Dispatchers.Main)
             {
                 ctrl.updateList(List);
             }.invokeOnCompletion {
-                TH.showToast("Updated list.",Toast.LENGTH_SHORT)
+                TH.showToast("Updated list.", Toast.LENGTH_SHORT)
                 UpdateData()
-                selectmode=false;
+                selectmode = false;
                 UpdateUI()
             }
         }
 
-        binding.ibDecProduct.setOnClickListener{
-            for(i in SelectedItems)
-            {
-                List.Products?.get(i)?.Amount = List.Products!![i]?.Amount?.minus(1)!!;
+        binding.ibDecProduct.setOnClickListener {
+            for (i in SelectedItems) {
+                if(List?.Products?.get(i)?.Amount!! >1)
+                {
+                    List!!.Products?.get(i)?.Amount = List!!.Products!![i]?.Amount?.minus(1)!!;
+                }
+                else
+                {
+                    TH.showToast("Cannot lower amount more than one.", Toast.LENGTH_SHORT);
+                }
             }
             lifecycleScope.launch(Dispatchers.Main)
             {
                 ctrl.updateList(List);
             }.invokeOnCompletion {
-                TH.showToast("Updated list.",Toast.LENGTH_SHORT);
+                TH.showToast("Updated list.", Toast.LENGTH_SHORT);
                 UpdateData()
-                selectmode=false;
+                selectmode = false;
                 UpdateUI()
             }
         }
-        binding.ibAddProduct.setOnClickListener{
-            val directions = ShoppingListFragmentDirections.actionShoppingListFragmentToFragmentAddProduct(List.ID.toString())
+        binding.ibAddProduct.setOnClickListener {
+            val directions =
+                ShoppingListFragmentDirections.actionShoppingListFragmentToFragmentAddProduct(List.ID.toString())
             navController.navigate(directions)
 
         }
 
-        binding.ibChkProduct.setOnClickListener{
-            for(i in SelectedItems)
-            {
-                List.Products?.get(i)?.Checked=true;
+        binding.ibChkProduct.setOnClickListener {
+            for (i in SelectedItems) {
+                List.Products?.get(i)?.Checked = true;
             }
             lifecycleScope.launch(Dispatchers.Main)
             {
                 ctrl.updateList(List);
             }.invokeOnCompletion {
-                TH.showToast("Updated list.",Toast.LENGTH_SHORT);
+                TH.showToast("Updated list.", Toast.LENGTH_SHORT);
                 UpdateData()
-                selectmode=false;
+                selectmode = false;
                 UpdateUI()
             }
         }
-        binding.ibUnchkProduct.setOnClickListener{
-            for(i in SelectedItems)
-            {
-                List.Products?.get(i)?.Checked=false;
+        binding.ibUnchkProduct.setOnClickListener {
+            for (i in SelectedItems) {
+                List.Products?.get(i)?.Checked = false;
             }
             lifecycleScope.launch(Dispatchers.Main)
             {
                 ctrl.updateList(List);
             }.invokeOnCompletion {
-                TH.showToast("Updated list.",Toast.LENGTH_SHORT);
+                TH.showToast("Updated list.", Toast.LENGTH_SHORT);
                 UpdateData()
-                selectmode=false;
+                selectmode = false;
                 UpdateUI()
             }
+        }
+
+        binding.ibRemoveProduct.setOnClickListener {
+            val dialogClickListener =
+                DialogInterface.OnClickListener { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+
+                            lifecycleScope.launch(Dispatchers.Main)
+                            {
+                                for(i in SelectedItems)
+                                {
+                                    List.Products?.removeAt(i);
+                                }
+                                ctrl.updateList(List);
+                            }.invokeOnCompletion {
+                                TH.showToast("Removed list items.", Toast.LENGTH_SHORT);
+                                UpdateData()
+                                selectmode=false;
+                                UpdateUI()
+                                FilterData()
+                            }
+
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> {}
+                    }
+                }
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder( ContextThemeWrapper(context,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).setTitle("Question").setIcon(R.drawable.question).show()
+        }
+
+        binding.ibSearch.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle("Search").setIcon(R.drawable.magnifier)
+            val input = EditText(requireContext());
+            input.setTextColor(resources.getColor(R.color.sys_text));
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
+            builder.setNeutralButton("Remove filter",DialogInterface.OnClickListener{dialog,which->FilterData(true)})
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+            builder.show()
         }
 
 
     }
 
-    private fun UpdateData()
-    {
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
-        var TH:ToastHandler = ToastHandler(requireContext())
+    private fun UpdateData() {
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        var TH: ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.rwShoppingList;
         recyclerView.layoutManager = LinearLayoutManager(context)
-        var list:ShoppingList = ShoppingList();
+        var list: ShoppingList = ShoppingList();
         lifecycleScope.launch(Dispatchers.Main) {
             var listid = args.LISTID;
             list = ctrl.getList(ctrl.getUID()!!, listid)!!;
-            List=list;
-            var data:ArrayList<ItemsViewModel> = arrayListOf();
-            for(p in list.Products!!)
-            {
-                data.add(ItemsViewModel(R.drawable.product,p.Product?.Name+" ("+p.Amount+")", p.Product!!.ID.toString(),p.Checked))
-            }
-            var adapter = CustomAdapter(data)
-            adapter.setOnLongClickListener(object:CustomAdapter.OnLongClickListener{
-                override fun onLongClick(position: Int, model: ItemsViewModel) : Boolean
+            List = list;
+            binding.twTitle.setText(List.Name);
+            var data: ArrayList<ItemsViewModel> = arrayListOf();
+            var totalprice:Float=0.0f;
+            for (p in list.Products!!) {
+
+                if(p.Checked)
                 {
-
-                    selectmode=true;
-                    for(item in SelectedItems)
-                    {
-                            updateCardBackgroundColor(item, R.color.sys_background)
-                    }
-                    SelectedItems.clear()
-                    UpdateUI();
-                    if(SelectedItems.contains(position)==false)
-                    {
-                        updateCardBackgroundColor(position,R.color.sys_selection)
-                        SelectedItems.add(position);
-                    }
-                    return true;
+                    totalprice += ctrl.getPriceForProduct(
+                        p.Product?.ID.toString(),
+                        list.Store?.ID.toString()
+                    )?.Price?.times(p.Amount)!!
                 }
-            })
-            adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
-                override fun onClick(position: Int, model: ItemsViewModel) {
-                    if(selectmode)
-                    {
-                        if(SelectedItems.contains(position)) {
-                            updateCardBackgroundColor(position,R.color.sys_background);
-                            SelectedItems.remove(position);
-                            if(SelectedItems.size==0)
-                            {
-                                selectmode=false;
-                                UpdateUI();
-                            }
-                        }
-                        else
-                        {
-                            updateCardBackgroundColor(position,R.color.sys_selection)
-                            SelectedItems.add(position);
-                        }
-                    }
-                }
-            })
-
-            recyclerView.adapter=adapter;
+                data.add(
+                    ItemsViewModel(
+                        R.drawable.product,
+                        p.Product?.Name + " (" + p.Amount + ")\t" + ctrl.getPriceForProduct(p.Product?.ID.toString(),list.Store?.ID.toString())?.Price.toString(),
+                        p.Product!!.ID.toString(),
+                        p.Checked
+                    )
+                )
+            }
+            SetAdapter(data);
+            binding.twPrice.text=totalprice.toString();
         }
     }
-    private fun UpdateUI()
+
+    private fun FilterData(removeFilter:Boolean=false)
     {
-
-        if(selectmode==true)
-        {
-            binding.ibDecProduct.visibility = View.VISIBLE;
-            binding.ibIncProduct.visibility=View.VISIBLE;
-            binding.ibRemoveProduct.visibility=View.VISIBLE;
-            binding.ibChkProduct.visibility=View.VISIBLE;
-            binding.ibUnchkProduct.visibility=View.VISIBLE;
-
-            binding.ibAddProduct.visibility=View.INVISIBLE;
+        lifecycleScope.launch(Dispatchers.Main) {
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var data: ArrayList<ItemsViewModel> = arrayListOf();
+            for (p in List.Products!!) {
+                if (p.Product?.Name?.contains(searchCriteria)!! || removeFilter == true || searchCriteria == "") {
+                    data.add(
+                        ItemsViewModel(
+                            R.drawable.product,
+                            p.Product?.Name + " (" + p.Amount + ")\t" + ctrl.getPriceForProduct(
+                                p.Product?.ID.toString(),
+                                List.Store?.ID.toString()
+                            )?.Price.toString(),
+                            p.Product!!.ID.toString(),
+                            p.Checked
+                        )
+                    )
+                }
+            }
+            SetAdapter(data);
+            if (removeFilter) {
+                searchCriteria = "";
+            }
         }
-        else
-        {
+    }
+
+    private fun UpdateUI() {
+
+        if (selectmode == true) {
+            binding.ibDecProduct.visibility = View.VISIBLE;
+            binding.ibIncProduct.visibility = View.VISIBLE;
+            binding.ibRemoveProduct.visibility = View.VISIBLE;
+            binding.ibChkProduct.visibility = View.VISIBLE;
+            binding.ibUnchkProduct.visibility = View.VISIBLE;
+
+            binding.ibAddProduct.visibility = View.INVISIBLE;
+
+            binding.ibSearch.visibility=View.INVISIBLE;
+
+            binding.iwCart.visibility=View.INVISIBLE;
+            binding.twPrice.visibility=View.INVISIBLE;
+        } else {
 
             binding.ibDecProduct.visibility = View.INVISIBLE;
-            binding.ibIncProduct.visibility=View.INVISIBLE;
-            binding.ibRemoveProduct.visibility=View.INVISIBLE;
-            binding.ibChkProduct.visibility=View.INVISIBLE;
-            binding.ibUnchkProduct.visibility=View.INVISIBLE;
+            binding.ibIncProduct.visibility = View.INVISIBLE;
+            binding.ibRemoveProduct.visibility = View.INVISIBLE;
+            binding.ibChkProduct.visibility = View.INVISIBLE;
+            binding.ibUnchkProduct.visibility = View.INVISIBLE;
 
-            binding.ibAddProduct.visibility=View.VISIBLE;
+            binding.ibAddProduct.visibility = View.VISIBLE;
+            binding.ibSearch.visibility = View.VISIBLE;
+
+            binding.iwCart.visibility=View.VISIBLE;
+            binding.twPrice.visibility=View.VISIBLE;
         }
+    }
+
+    private fun SetAdapter(data: ArrayList<ItemsViewModel>)
+    {
+        var recyclerView = binding.rwShoppingList;
+        var adapter = CustomAdapter(data)
+        adapter.setOnLongClickListener(object : CustomAdapter.OnLongClickListener {
+            override fun onLongClick(position: Int, model: ItemsViewModel): Boolean {
+
+                selectmode = true;
+                for (item in SelectedItems) {
+                    updateCardBackgroundColor(item, R.color.sys_background)
+                }
+                SelectedItems.clear()
+                UpdateUI();
+                if (SelectedItems.contains(position) == false) {
+                    updateCardBackgroundColor(position, R.color.sys_selection)
+                    SelectedItems.add(position);
+                }
+                return true;
+            }
+        })
+        adapter.setOnClickListener(object : CustomAdapter.OnClickListener {
+            override fun onClick(position: Int, model: ItemsViewModel) {
+                if (selectmode) {
+                    if (SelectedItems.contains(position)) {
+                        updateCardBackgroundColor(position, R.color.sys_background);
+                        SelectedItems.remove(position);
+                        if (SelectedItems.size == 0) {
+                            selectmode = false;
+                            UpdateUI();
+                        }
+                    } else {
+                        updateCardBackgroundColor(position, R.color.sys_selection)
+                        SelectedItems.add(position);
+                    }
+                }
+                else
+                {
+                    var dir = ShoppingListFragmentDirections.actionShoppingListFragmentToListItemViewFragment(List.ID.toString(),position);
+                    navController.navigate(dir);
+                }
+            }
+        })
+        recyclerView.adapter=adapter;
     }
 
     private fun updateCardBackgroundColor(position: Int,color:Int) {

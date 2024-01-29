@@ -22,9 +22,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rwLists"
-        android:layout_width="410dp"
-        android:layout_height="597dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="408dp"
+        android:layout_height="568dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
@@ -61,5 +61,16 @@
         android:src="@drawable/dellist512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rwLists" />
+
+    <ImageButton
+        android:id="@+id/ibSearch"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/magnifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

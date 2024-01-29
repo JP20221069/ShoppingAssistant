@@ -76,17 +76,19 @@ class ShoppingAssistantController()
     }
     suspend fun getPriceForProduct(ProductID:String,StoreID:String): Price? {
         return try {
-            val databaseReference: DatabaseReference = DBinstance.getReference("PRICES")
-            val query = databaseReference.orderByKey().equalTo("P"+ProductID+"S"+StoreID)
-            val snapshot: DataSnapshot = query.get().await()
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRICES/"+StoreID+"/"+ProductID)
+            val snapshot: DataSnapshot = databaseReference.get().await()
             if(snapshot.exists())
             {
-                val price = snapshot.children.first().getValue(Price::class.java)
-                price
+                val price:Price=Price();
+                price.ProductID= ProductID.toInt();
+                price.StoreID=StoreID.toInt();
+                price.Price=snapshot.getValue(Float::class.java)!!;
+                return price
             }
             else
             {
-                null
+                return null
             }
         } catch (e: DatabaseException) {
             println(e.message)

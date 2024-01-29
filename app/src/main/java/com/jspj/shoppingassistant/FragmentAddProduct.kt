@@ -1,10 +1,15 @@
 package com.jspj.shoppingassistant
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
+import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
@@ -39,7 +44,11 @@ class FragmentAddProduct : Fragment() {
     private lateinit var navController: NavController
     private var selectedProduct: Product?=null;
     private var selectedIndex:Int=-1;
-    private val args:FragmentAddProductArgs by navArgs()
+    private val args:FragmentAddProductArgs by navArgs();
+    private var selectmode:Boolean=false;
+    private var searchCriteria:String="";
+    private var Products:List<Product> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,41 +71,17 @@ class FragmentAddProduct : Fragment() {
         np.minValue=1;
         np.maxValue=Int.MAX_VALUE;
         np.value=1;
+        var recyclerView = binding.rwProducts;
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        UpdateData()
 
-        var recyclerview=binding.rwProducts;
-        recyclerview.layoutManager = LinearLayoutManager(context)
-        var products:List<Product> = ArrayList();
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController()
-        lifecycleScope.launch(Dispatchers.Main) {
-            products = ctrl.getProducts()
-            var data:ArrayList<ItemsViewModel> = arrayListOf();
-            for(p in products)
-            {
-                data.add(ItemsViewModel(R.drawable.product,p.ID.toString()+" "+p.Name,p.ID.toString()))
-            }
-            // This will pass the ArrayList to our Adapter
-            val adapter = CustomAdapter(data)
-            adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
-                override fun onClick(position: Int, model: ItemsViewModel) {
-                    if(selectedIndex!=-1)
-                    {
-                        updateCardBackgroundColor(selectedIndex,R.color.sys_background);
-                    }
-                    selectedIndex=position;
-                    lifecycleScope.launch(Dispatchers.Main)
-                    {
-                        selectedProduct=ctrl.getProductById(model.payload);
-                    }
-                    updateCardBackgroundColor(position,R.color.sys_selection);
-                }
-            })
-            recyclerview.adapter = adapter
-        }
 
         binding.btConfirm.setOnClickListener{
 
             var ctrl:ShoppingAssistantController = ShoppingAssistantController()
             var TH:ToastHandler = ToastHandler(requireContext());
+
+
             lifecycleScope.launch(Dispatchers.Main){
                 if(selectedProduct!=null) {
                     var list: ShoppingList = ShoppingList()
@@ -117,7 +102,23 @@ class FragmentAddProduct : Fragment() {
             }
         }
 
+        binding.ibSearch.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle("Search").setIcon(R.drawable.magnifier)
+            val input = EditText(requireContext());
+            input.setTextColor(resources.getColor(R.color.sys_text));
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
+            builder.setNeutralButton("Remove filter", DialogInterface.OnClickListener{ dialog, which->FilterData(true)})
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+            builder.show()
+        }
+
     }
+
 
     private fun updateCardBackgroundColor(position: Int,color:Int) {
         // Update the background color of the clicked card
@@ -127,6 +128,66 @@ class FragmentAddProduct : Fragment() {
         cardView?.setCardBackgroundColor(resources.getColor(color))
     }
 
+    private fun UpdateData() {
+
+        var products:List<Product> = ArrayList();
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController()
+        lifecycleScope.launch(Dispatchers.Main) {
+            products = ctrl.getProducts()
+            Products=products;
+            var data:ArrayList<ItemsViewModel> = arrayListOf();
+            for(p in products)
+            {
+                data.add(ItemsViewModel(R.drawable.product,p.Name,p.ID.toString()))
+            }
+            SetAdapter(data);
+
+        }
+    }
+
+    private fun FilterData(removeFilter:Boolean=false)
+    {
+        var data: ArrayList<ItemsViewModel> = arrayListOf();
+        for (p in Products) {
+            if (p.Name?.contains(searchCriteria)!! || removeFilter == true || searchCriteria=="") {
+                data.add(
+                    ItemsViewModel(
+                        R.drawable.product,
+                        p.Name,
+                        p.ID.toString()
+                    )
+                )
+            }
+        }
+        SetAdapter(data);
+        if(removeFilter)
+        {
+            searchCriteria="";
+        }
+    }
+
+    private fun SetAdapter(data: ArrayList<ItemsViewModel>) {
+        var recyclerView = binding.rwProducts;
+        var ctrl:ShoppingAssistantController = ShoppingAssistantController()
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomAdapter(data)
+        adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
+            override fun onClick(position: Int, model: ItemsViewModel) {
+                if(selectedIndex!=-1)
+                {
+                    updateCardBackgroundColor(selectedIndex,R.color.sys_background);
+                }
+                selectedIndex=position;
+                lifecycleScope.launch(Dispatchers.Main)
+                {
+                    selectedProduct=ctrl.getProductById(model.payload);
+                }
+                updateCardBackgroundColor(position,R.color.sys_selection);
+            }
+        })
+        recyclerView.adapter = adapter;
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

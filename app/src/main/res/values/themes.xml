@@ -40,4 +40,10 @@
         <item name="android:textColorPrimary">@color/sys_text</item>
         <item name="android:textSize">16dp</item>
     </style>
+
+    <style name="Theme.ShoppingAssistant.Price">
+        <item name="android:textColorPrimary">@color/forest_green</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/consola</item>
+    </style>
 </resources>
