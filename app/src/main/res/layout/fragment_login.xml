@@ -84,7 +84,8 @@
                 android:singleLine="true"
                 android:textColor="@color/sys_text"
                 app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp" />
+                app:boxStrokeWidthFocused="0dp"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
 

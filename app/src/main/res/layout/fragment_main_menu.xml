@@ -45,6 +45,7 @@
         android:layout_marginTop="130dp"
         android:scaleType="fitCenter"
         android:src="@drawable/lists512"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,6 +68,7 @@
         android:layout_marginTop="280dp"
         android:scaleType="fitXY"
         android:src="@drawable/product"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

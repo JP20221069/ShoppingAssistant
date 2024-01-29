@@ -8,12 +8,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.model.Price
 import com.jspj.shoppingassistant.model.Product
 import com.jspj.shoppingassistant.model.ShoppingItem
 import com.jspj.shoppingassistant.model.ShoppingList
 import com.jspj.shoppingassistant.model.Store
 import kotlinx.coroutines.tasks.await
+import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -35,6 +37,7 @@ class ShoppingAssistantController()
 
             productList
         } catch (e: DatabaseException) {
+            println(e.message)
             emptyList()
         }
     }
@@ -51,6 +54,7 @@ class ShoppingAssistantController()
 
             storeList
         } catch (e: DatabaseException) {
+            println(e.message)
             emptyList()
         }
     }
@@ -71,6 +75,7 @@ class ShoppingAssistantController()
             }
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
             null
         }
     }
@@ -113,6 +118,7 @@ class ShoppingAssistantController()
             }
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
             null
         }
     }
@@ -161,6 +167,7 @@ class ShoppingAssistantController()
         catch (e: DatabaseException)
         {
             // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
             null
         }
         null
