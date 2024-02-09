@@ -13,10 +13,10 @@
         android:id="@+id/twListsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
         android:layout_marginTop="16dp"
-        android:text="@string/lists_en"
+        android:text="@string/ttl_my_shopping_lists"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

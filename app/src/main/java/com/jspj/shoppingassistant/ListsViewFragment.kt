@@ -96,22 +96,22 @@ class ListsViewFragment : Fragment() {
                 }
 
             val builder: AlertDialog.Builder = AlertDialog.Builder( ContextThemeWrapper(context,R.style.Theme_ShoppingAssistant_Dialog))
-            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).setTitle("Question").setIcon(R.drawable.question).show()
+            builder.setMessage(R.string.pup_areyousure).setPositiveButton(R.string.btn_yes, dialogClickListener)
+                .setNegativeButton(R.string.btn_no, dialogClickListener).setTitle(R.string.ttl_question).setIcon(R.drawable.question).show()
         }
 
 
         binding.ibSearch.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
-            builder.setTitle("Search").setIcon(R.drawable.magnifier)
+            builder.setTitle(R.string.ttl_search).setIcon(R.drawable.magnifier)
             val input = EditText(requireContext());
             input.setTextColor(resources.getColor(R.color.sys_text));
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
-            builder.setPositiveButton("OK",
+            builder.setPositiveButton(R.string.btn_ok,
                 DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
-            builder.setNeutralButton("Remove filter",DialogInterface.OnClickListener{dialog,which->FilterData(true)})
-            builder.setNegativeButton("Cancel",
+            builder.setNeutralButton(R.string.btn_remove_filter,DialogInterface.OnClickListener{dialog,which->FilterData(true)})
+            builder.setNegativeButton(R.string.btn_cancel,
                 DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
             builder.show()
         }

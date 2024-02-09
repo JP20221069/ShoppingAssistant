@@ -12,7 +12,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="176dp"
-        android:text="@string/username_en"
+        android:text="@string/lbl_username"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +95,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="244dp"
-        android:text="@string/password_en"
+        android:text="@string/lbl_password"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -104,10 +104,10 @@
         android:id="@+id/twTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
         android:layout_marginTop="16dp"
-        android:text="@string/greeting_en"
+        android:text="@string/ttl_greeting"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,9 +116,10 @@
         style="@style/Theme.ShoppingAssistant.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="307dp"
-        android:layout_marginTop="299dp"
-        android:text="@string/login_en"
+        android:layout_marginTop="300dp"
+        android:text="@string/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="368dp"
-        android:text="@string/dha_en"
+        android:text="@string/ttl_dont_have_account"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -139,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="188dp"
         android:layout_marginTop="368dp"
-        android:text="@string/signup_en"
+        android:text="@string/lnk_signup"
         android:textAppearance="@style/Theme.ShoppingAssistant.Link"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

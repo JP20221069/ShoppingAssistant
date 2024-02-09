@@ -89,7 +89,7 @@ class ListItemViewFragment : Fragment() {
             }
             else
             {
-                TH.showToast("Cannot lower amount more than one.", Toast.LENGTH_SHORT);
+                TH.showToast(R.string.tst_less_than_one, Toast.LENGTH_SHORT);
             }
         }
 
@@ -123,7 +123,7 @@ class ListItemViewFragment : Fragment() {
                     var dir = ListItemViewFragmentDirections.actionListItemViewFragmentToShoppingListFragment(listid);
                     navController.navigate(dir);
                 }
-                TH.showToast("Updated item.",Toast.LENGTH_SHORT);
+                TH.showToast(R.string.tst_updated_item,Toast.LENGTH_SHORT);
             }
         }
     }

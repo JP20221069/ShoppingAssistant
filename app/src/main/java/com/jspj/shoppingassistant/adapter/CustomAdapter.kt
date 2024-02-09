@@ -1,6 +1,7 @@
 package com.jspj.shoppingassistant.adapter
 import android.graphics.Color
 import android.graphics.Paint
+import android.text.TextUtils
 import com.jspj.shoppingassistant.model.ItemsViewModel
 import android.view.LayoutInflater
 import android.view.View
@@ -33,15 +34,15 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
 
         val ItemsViewModel = mList[position]
         this.holder=holder;
-        // sets the image to the imageview from our itemHolder class
+
         holder.imageView.setImageResource(ItemsViewModel.image)
-        // sets the text to the textview from our itemHolder class
+        holder.textView.setEllipsize(TextUtils.TruncateAt.MIDDLE)
         holder.textView.text = ItemsViewModel.text
-        var chk = holder.cardView.findViewById<ImageView>(R.id.imgCheck);
+        val chk = holder.cardView.findViewById<ImageView>(R.id.imgCheck);
         if(ItemsViewModel.checked)
         {
             chk.setImageResource(R.drawable.check);
-            var tw = holder.textView
+            val tw = holder.textView
             tw.paintFlags=tw.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             tw.setTextColor(Color.DKGRAY)
         }

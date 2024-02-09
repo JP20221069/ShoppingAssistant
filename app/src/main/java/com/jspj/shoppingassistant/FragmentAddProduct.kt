@@ -90,29 +90,29 @@ class FragmentAddProduct : Fragment() {
 
                     list.addProduct(selectedProduct!!, np.value);
                     ctrl.updateList(list);
-                    TH.showToast("Added product.", Toast.LENGTH_SHORT)
+                    TH.showToast(R.string.tst_added_product, Toast.LENGTH_SHORT)
                     var directions=FragmentAddProductDirections.actionFragmentAddProductToShoppingListFragment(listid)
                     navController.navigate(directions);
                 }
                 else
                 {
 
-                    TH.showToast("NO PRODUCT SELECTED!", Toast.LENGTH_SHORT)
+                    TH.showToast(R.string.tst_no_product_selected, Toast.LENGTH_SHORT)
                 }
             }
         }
 
         binding.ibSearch.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
-            builder.setTitle("Search").setIcon(R.drawable.magnifier)
+            builder.setTitle(R.string.ttl_search).setIcon(R.drawable.magnifier)
             val input = EditText(requireContext());
             input.setTextColor(resources.getColor(R.color.sys_text));
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
-            builder.setPositiveButton("OK",
+            builder.setPositiveButton(R.string.btn_ok,
                 DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
-            builder.setNeutralButton("Remove filter", DialogInterface.OnClickListener{ dialog, which->FilterData(true)})
-            builder.setNegativeButton("Cancel",
+            builder.setNeutralButton(R.string.btn_remove_filter, DialogInterface.OnClickListener{ dialog, which->FilterData(true)})
+            builder.setNegativeButton(R.string.btn_cancel,
                 DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
             builder.show()
         }
@@ -167,9 +167,8 @@ class FragmentAddProduct : Fragment() {
     }
 
     private fun SetAdapter(data: ArrayList<ItemsViewModel>) {
-        var recyclerView = binding.rwProducts;
-        var ctrl:ShoppingAssistantController = ShoppingAssistantController()
-        // This will pass the ArrayList to our Adapter
+        val recyclerView = binding.rwProducts;
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController()
         val adapter = CustomAdapter(data)
         adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
             override fun onClick(position: Int, model: ItemsViewModel) {

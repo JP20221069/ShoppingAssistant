@@ -1,7 +1,6 @@
 package com.jspj.shoppingassistant
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputType
@@ -14,7 +13,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.adapter.CustomAdapter
@@ -22,7 +20,6 @@ import com.jspj.shoppingassistant.controller.ShoppingAssistantController
 import com.jspj.shoppingassistant.databinding.FragmentProductBinding
 import com.jspj.shoppingassistant.model.ItemsViewModel
 import com.jspj.shoppingassistant.model.Product
-import com.jspj.shoppingassistant.model.ShoppingList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -72,15 +69,17 @@ class ProductFragment : Fragment() {
         UpdateData()
 
         binding.bttest.setOnClickListener{
-            val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+            //val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+           // val ctrl:SQLController = SQLController();
             //var test: MutableList<ShoppingList> = mutableListOf(ShoppingList());
-            var test:String="FAILED";
-            lifecycleScope.launch(Dispatchers.IO) {
-
+             var test:List<Product> = mutableListOf(Product());
+            //var test:String="FAILED";
+            lifecycleScope.launch(Dispatchers.Main) {
+                test=ctrl.getProductsByProducer("0");
                 //test= ctrl.getListsByUser(ctrl.getUID()!!);
-                test=ctrl.getLastListIDByUser(ctrl.getUID()!!);
+             //   test = ctrl.fetchDataAsync().first();
             }.invokeOnCompletion {
-                TH.showToast(test, Toast.LENGTH_SHORT);
+                TH.showToast(test.first().Name, Toast.LENGTH_SHORT);
             }
             //TH.showToast(ctrl.getUID(),Toast.LENGTH_SHORT);
 
@@ -89,14 +88,14 @@ class ProductFragment : Fragment() {
 
         binding.btFind.setOnClickListener{
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
-            builder.setTitle("Search").setIcon(R.drawable.search)
+            builder.setTitle(R.string.ttl_search).setIcon(R.drawable.search)
             val input = EditText(requireContext());
             input.setTextColor(resources.getColor(R.color.sys_text));
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
-            builder.setPositiveButton("OK",
+            builder.setPositiveButton(R.string.btn_ok,
                 DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
-            builder.setNegativeButton("Cancel",
+            builder.setNegativeButton(R.string.btn_cancel,
                 DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
             builder.show()
         }
@@ -123,7 +122,7 @@ class ProductFragment : Fragment() {
             var adapter = CustomAdapter(data)
             adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
                 override fun onClick(position: Int, model: ItemsViewModel) {
-
+                    
                 }
             })
 

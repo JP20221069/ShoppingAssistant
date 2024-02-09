@@ -1,5 +1,6 @@
 package com.jspj.shoppingassistant.controller
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
@@ -10,6 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.model.Price
+import com.jspj.shoppingassistant.model.Producer
 import com.jspj.shoppingassistant.model.Product
 import com.jspj.shoppingassistant.model.ShoppingItem
 import com.jspj.shoppingassistant.model.ShoppingList
@@ -31,14 +33,48 @@ class ShoppingAssistantController()
             val snapshot: DataSnapshot = databaseReference.get().await()
             val productList = mutableListOf<Product>()
             for (productSnapshot in snapshot.children) {
-                val product = productSnapshot.getValue(Product::class.java)
-                product?.let { productList.add(it) }
+               // val product = productSnapshot.getValue(Product::class.java)
+                //product?.let { productList.add(it) }
+                var product = Product();
+                product.ID = productSnapshot.child("id").getValue(Int::class.java)!!;
+                product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
+                product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
+                product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
+                productList.add(product);
             }
 
-            productList
+            return productList;
+
         } catch (e: DatabaseException) {
             println(e.message)
-            emptyList()
+            return emptyList();
+        }
+    }
+
+    suspend fun getProductsByProducer(ProducerID: String): List<Product> {
+        return try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS")
+
+            val productList = mutableListOf<Product>()
+            val id:Double=0.0;
+            val query = databaseReference.orderByChild("producer").equalTo(ProducerID.toDouble());
+            val snapshot: DataSnapshot = query.get().await()
+            for (productSnapshot in snapshot.children) {
+                // val product = productSnapshot.getValue(Product::class.java)
+                //product?.let { productList.add(it) }
+                var product = Product();
+                product.ID = productSnapshot.child("id").getValue(Int::class.java)!!;
+                product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
+                product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
+                product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
+                productList.add(product);
+            }
+
+            return productList;
+
+        } catch (e: DatabaseException) {
+            println(e.message)
+            return emptyList();
         }
     }
 
@@ -100,10 +136,10 @@ class ShoppingAssistantController()
             null
         }
     }
-    // Function to retrieve a specific product by ID using a query without using event listeners
+
     suspend fun getProductById(productId: String): Product? {
         return try {
-            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS")
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS/")
             // Use orderByKey() and equalTo() to create a query for the specified ID
             val query = databaseReference.orderByKey().equalTo(productId)
             val productSnapshot: DataSnapshot = query.get().await()
@@ -111,15 +147,19 @@ class ShoppingAssistantController()
             // Check if the product with the specified ID exists
             if (productSnapshot.exists()) {
                 // Convert the snapshot to a Product object
-                val product = productSnapshot.children.first().getValue(Product::class.java)
-                product
+                val product = Product();
+                product.ID = productSnapshot.children.first().child("id").getValue(Int::class.java)!!;
+                product.Name = productSnapshot.children.first().child("name").getValue(String::class.java)!!;
+                product.Description=productSnapshot.children.first().child("description").getValue(String::class.java)!!;
+                product.Producer=getProducerById(productSnapshot.children.first().child("producer").getValue(Int::class.java)!!.toString())
+                return product
             } else {
-                null
+                return null
             }
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
-            null
+            return null
         }
     }
 
@@ -170,7 +210,6 @@ class ShoppingAssistantController()
             println(e.message)
             null
         }
-        null
     }
 
     suspend fun getListsByUser(userID: String) : MutableList<ShoppingList>
@@ -194,7 +233,7 @@ class ShoppingAssistantController()
 
     suspend fun getLastListIDByUser(userID: String) : String
     {
-        return try {
+        try {
             val databaseReference: DatabaseReference = DBinstance.getReference("LISTS/"+userID)
             val snapshot: DataSnapshot = databaseReference.orderByKey().limitToLast(1).get().await()
 
@@ -212,6 +251,46 @@ class ShoppingAssistantController()
             return ""
         }
     }
+
+    suspend fun getProducers(): List<Producer> {
+        return try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCERS")
+            val snapshot: DataSnapshot = databaseReference.get().await()
+            val producerList = mutableListOf<Producer>()
+            for (producerSnapshot in snapshot.children) {
+                val store = producerSnapshot.getValue(Producer::class.java)
+                store?.let { producerList.add(it) }
+            }
+
+            return  producerList
+        } catch (e: DatabaseException) {
+            println(e.message)
+            return emptyList()
+        }
+    }
+
+    suspend fun getProducerById(ProducerID: String): Producer? {
+        return try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCERS")
+            // Use orderByKey() and equalTo() to create a query for the specified ID
+            val query = databaseReference.orderByKey().equalTo(ProducerID)
+            val producerSnapshot: DataSnapshot = query.get().await()
+
+            // Check if the product with the specified ID exists
+            if (producerSnapshot.exists()) {
+                // Convert the snapshot to a Product object
+                val producer = producerSnapshot.children.first().getValue(Producer::class.java)
+                return producer;
+            } else {
+                return null
+            }
+        } catch (e: DatabaseException) {
+            // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
+            return null
+        }
+    }
+
 
     fun getUID() : String?
     {
@@ -274,7 +353,7 @@ class ShoppingAssistantController()
 
             true
         } catch (e: DatabaseException) {
-            // Handle exceptions, e.g., permission denied, network issues, etc.
+
             println(e.message)
             false
         }
@@ -296,6 +375,7 @@ class ShoppingAssistantController()
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private suspend fun Task<DataSnapshot>.await(): DataSnapshot {
         return suspendCoroutine { continuation ->
             addOnCompleteListener {

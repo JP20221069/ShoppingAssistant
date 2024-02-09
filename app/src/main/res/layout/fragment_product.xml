@@ -23,7 +23,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="23dp"
         android:text="Button"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

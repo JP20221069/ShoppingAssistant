@@ -44,7 +44,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="244dp"
-        android:text="@string/password_en"
+        android:text="@string/lbl_password"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +55,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="176dp"
-        android:text="@string/username_en"
+        android:text="@string/lbl_username"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +138,7 @@
         android:layout_height="67dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="292dp"
-        android:text="@string/repass_en"
+        android:text="@string/lbl_repass"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -147,10 +147,10 @@
         android:id="@+id/twTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:text="@string/newuser_message_en"
+        android:text="@string/ttl_newuser_message"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,10 +159,11 @@
         style="@style/Theme.ShoppingAssistant.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="360dp"
-        android:text="@string/signup_en"
+        android:layout_marginTop="364dp"
+        android:text="@string/lnk_signup"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

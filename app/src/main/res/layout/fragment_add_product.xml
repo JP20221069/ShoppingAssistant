@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
         android:layout_marginTop="16dp"
-        android:text="SELECT A PRODUCT"
+        android:text="@string/ttl_select_a_product"
         android:textColor="@color/sys_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="88dp"
-        android:text="AMOUNT:"
+        android:text="@string/lbl_amount"
         android:textColor="@color/sys_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,6 +77,7 @@
 
     <Button
         android:id="@+id/btConfirm"
+        style="@style/Theme.ShoppingAssistant.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"

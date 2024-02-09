@@ -12,7 +12,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="84dp"
-        android:text="List name"
+        android:text="@string/lbl_list_name"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="16dp"
-        android:text="ADD A LIST"
+        android:text="@string/ttl_add_list"
         android:textAlignment="center"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="168dp"
-        android:text="Store"
+        android:text="@string/lbl_store"
         android:textAppearance="@style/Theme.ShoppingAssistant.Text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="282dp"
         android:layout_marginTop="57dp"
-        android:text="CONFIRM"
+        android:text="@string/btn_confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbStore" />
 </androidx.constraintlayout.widget.ConstraintLayout>
