@@ -84,7 +84,7 @@ class ProductFragment : Fragment() {
         binding.ibDetails.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
             builder.setTitle(R.string.ttl_information).setIcon(R.drawable.information)
-            builder.setMessage(getString(R.string.lbl_description)+" "+Product.Description+"\n"+getString(R.string.lbl_manufacturer)+" "+Product.Producer!!.Name + " , "+ Product.Producer!!.Address);
+            builder.setMessage(getString(R.string.lbl_description)+" "+Product.Description+"\n"+getString(R.string.lbl_manufacturer)+" "+Product.Producer!!.Name + " , "+ Product.Producer!!.Address +"\n"+getString(R.string.lbl_barcode)+" "+Product.Barcode);
             builder.setPositiveButton(R.string.btn_ok,
                 DialogInterface.OnClickListener { dialog, which -> dialog.cancel()})
             builder.show()

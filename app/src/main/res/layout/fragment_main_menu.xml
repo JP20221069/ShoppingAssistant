@@ -93,6 +93,42 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/ibProducers"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="576dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/factory"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibQuit"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="576dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/product"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibScanner"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="436dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/barcode"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/ibMap"
         android:layout_width="112dp"
         android:layout_height="109dp"

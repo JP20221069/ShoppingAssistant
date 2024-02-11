@@ -49,6 +49,10 @@ class MainMenuFragment : Fragment() {
         binding.ibMap.setOnClickListener{
             navController.navigate(R.id.action_mainMenuFragment_to_mapFragment)
         }
+
+        binding.ibScanner.setOnClickListener {
+            navController.navigate(R.id.action_mainMenuFragment_to_scannerFragment)
+        }
     }
 
     override fun onCreateView(

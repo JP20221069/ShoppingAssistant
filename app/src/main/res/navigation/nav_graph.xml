@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_productsViewFragment2"
             app:destination="@id/productsViewFragment2" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -179,5 +182,14 @@
             android:name="SHOWCOORDS"
             app:argType="boolean"
             android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.jspj.shoppingassistant.ScannerFragment"
+        android:label="fragment_scanner"
+        tools:layout="@layout/fragment_scanner" >
+        <action
+            android:id="@+id/action_scannerFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
 </navigation>

@@ -85,5 +85,6 @@ dependencies {
     implementation ("net.sourceforge.jtds:jtds:1.3.1")
     implementation("org.osmdroid:osmdroid-android:6.1.14")
     implementation("org.osmdroid:osmdroid-third-party:5.6.3")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
 }

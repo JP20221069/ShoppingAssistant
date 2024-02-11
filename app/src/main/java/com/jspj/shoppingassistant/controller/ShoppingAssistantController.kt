@@ -41,6 +41,7 @@ class ShoppingAssistantController()
                 product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
                 product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
                 product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
+                product.Barcode= productSnapshot.children.first().child("barcode").getValue(String::class.java)!!
                 productList.add(product);
             }
 
@@ -67,6 +68,7 @@ class ShoppingAssistantController()
                 product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
                 product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
                 product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
+                product.Barcode= productSnapshot.children.first().child("barcode").getValue(String::class.java)!!
                 productList.add(product);
             }
 
@@ -213,6 +215,34 @@ class ShoppingAssistantController()
                 product.Name = productSnapshot.children.first().child("name").getValue(String::class.java)!!;
                 product.Description=productSnapshot.children.first().child("description").getValue(String::class.java)!!;
                 product.Producer=getProducerById(productSnapshot.children.first().child("producer").getValue(Int::class.java)!!.toString())
+                product.Barcode= productSnapshot.children.first().child("barcode").getValue(String::class.java)!!
+                return product
+            } else {
+                return null
+            }
+        } catch (e: DatabaseException) {
+            // Handle exceptions, e.g., permission denied, network issues, etc.
+            println(e.message)
+            return null
+        }
+    }
+
+    suspend fun getProductByBarcode(bcd: String): Product? {
+        return try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS/")
+            // Use orderByKey() and equalTo() to create a query for the specified ID
+            val query = databaseReference.orderByChild("barcode").equalTo(bcd)
+            val productSnapshot: DataSnapshot = query.get().await()
+
+            // Check if the product with the specified ID exists
+            if (productSnapshot.exists()) {
+                // Convert the snapshot to a Product object
+                val product = Product();
+                product.ID = productSnapshot.children.first().child("id").getValue(Int::class.java)!!;
+                product.Name = productSnapshot.children.first().child("name").getValue(String::class.java)!!;
+                product.Description=productSnapshot.children.first().child("description").getValue(String::class.java)!!;
+                product.Producer=getProducerById(productSnapshot.children.first().child("producer").getValue(Int::class.java)!!.toString())
+                product.Barcode= productSnapshot.children.first().child("barcode").getValue(String::class.java)!!
                 return product
             } else {
                 return null
