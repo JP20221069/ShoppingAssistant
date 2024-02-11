@@ -133,15 +133,7 @@ class ProductsViewFragment : Fragment() {
                 data.add(ItemsViewModel(R.drawable.product,p.Name,p.ID.toString()))
             }
         }
-        var adapter = CustomAdapter(data);
-        adapter.setOnClickListener(object: CustomAdapter.OnClickListener{
-            override fun onClick(position: Int, model: ItemsViewModel) {
-                var dir = ProductsViewFragmentDirections.actionProductsViewFragment2ToProductFragment(model.payload);
-                navController.navigate(dir);
-            }
-        })
-
-        recyclerView.adapter=adapter;
+        SetAdapter(data);
     }
 
     private fun UpdateUI()
@@ -155,6 +147,25 @@ class ProductsViewFragment : Fragment() {
             binding.twStoreName.visibility=View.VISIBLE;
         }
     }
+
+    private fun SetAdapter(data: ArrayList<ItemsViewModel>)
+    {
+        var recyclerView = binding.rwProducts;
+        var adapter = CustomAdapter(data)
+        adapter.setOnLongClickListener(object : CustomAdapter.OnLongClickListener {
+            override fun onLongClick(position: Int, model: ItemsViewModel): Boolean {
+                return true;
+            }
+        })
+        adapter.setOnClickListener(object : CustomAdapter.OnClickListener {
+            override fun onClick(position: Int, model: ItemsViewModel) {
+                var dir = ProductsViewFragmentDirections.actionProductsViewFragment2ToProductFragment(model.payload);
+                navController.navigate(dir);
+            }
+        })
+        recyclerView.adapter=adapter;
+    }
+
 
     companion object {
         /**

@@ -68,7 +68,7 @@ class ShoppingAssistantController()
                 product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
                 product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
                 product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
-                product.Barcode= productSnapshot.children.first().child("barcode").getValue(String::class.java)!!
+                product.Barcode= productSnapshot.child("barcode").getValue(String::class.java)!!
                 productList.add(product);
             }
 

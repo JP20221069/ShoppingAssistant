@@ -20,6 +20,7 @@
     <string name="lbl_description">Description:</string>
     <string name="lbl_manufacturer">MANUFACTURER:</string>
     <string name="lbl_barcode">Barcode:</string>
+    <string name="lbl_address">Address:</string>
     <string name="lnk_signup">Sign up</string>
     <string name="ttl_add_list">ADD A LIST</string>
     <string name="ttl_dont_have_account">Don\'t have an account?</string>
@@ -34,6 +35,7 @@
     <string name="ttl_map">Map</string>
     <string name="ttl_pricesandstores">Prices and stores</string>
     <string name="ttl_information">Information</string>
+    <string name="ttl_manufacturers">Manufacturers</string>
 
     <!--TOASTS AND POPUPS-->
     <string name="tst_added_product">Added product.</string>

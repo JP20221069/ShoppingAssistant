@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_producersViewFragment"
+            app:destination="@id/producersViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -191,5 +194,29 @@
         <action
             android:id="@+id/action_scannerFragment_to_productFragment"
             app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/producersViewFragment"
+        android:name="com.jspj.shoppingassistant.ProducersViewFragment"
+        android:label="fragment_producers_view"
+        tools:layout="@layout/fragment_producers_view" >
+        <action
+            android:id="@+id/action_producersViewFragment_to_producerFragment"
+            app:destination="@id/producerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/producerFragment"
+        android:name="com.jspj.shoppingassistant.ProducerFragment"
+        android:label="fragment_producer"
+        tools:layout="@layout/fragment_producer" >
+        <argument
+            android:name="PRODUCERID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_producerFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_producerFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 </navigation>

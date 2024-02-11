@@ -53,6 +53,10 @@ class MainMenuFragment : Fragment() {
         binding.ibScanner.setOnClickListener {
             navController.navigate(R.id.action_mainMenuFragment_to_scannerFragment)
         }
+
+        binding.ibProducers.setOnClickListener {
+            navController.navigate(R.id.action_mainMenuFragment_to_producersViewFragment)
+        }
     }
 
     override fun onCreateView(
