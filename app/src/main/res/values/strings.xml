@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
 <resources>
     <string name="app_name" translatable="false">ShoppingAssistant</string>
     <!-- TITLES AND LABELS: -->
@@ -40,6 +39,17 @@
     <string name="ttl_pricesandstores">Prices and stores</string>
     <string name="ttl_information">Information</string>
     <string name="ttl_manufacturers">Manufacturers</string>
+    <string name="ttl_settings">SETTINGS</string>
+
+    <string name="menu_title">MAIN MENU</string>
+    <string name="menu_lists">MY LISTS</string>
+    <string name="menu_stores">STORES</string>
+    <string name="menu_bcd">BARCODE SCANNER</string>
+    <string name="menu_map">MAP</string>
+    <string name="menu_products">PRODUCTS</string>
+    <string name="menu_manufacturers">MANUFACTURERS</string>
+    <string name="menu_exit">EXIT</string>
+
 
     <!--TOASTS AND POPUPS-->
     <string name="tst_added_product">Added product.</string>
@@ -55,6 +65,7 @@
     <string name="tst_showboth">Showing stores and manufacturers.</string>
     <string name="tst_satellitemode">Satellite mode.</string>
     <string name="tst_mapmode">Map mode.</string>
+    <string name="tst_restart">Restart the app.</string>
     <string name="pup_areyousure">Are you sure?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

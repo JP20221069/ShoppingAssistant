@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_producersViewFragment"
             app:destination="@id/producersViewFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -240,4 +243,9 @@
             android:id="@+id/action_producerFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.jspj.shoppingassistant.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -49,4 +49,14 @@
     <string name="tst_satellitemode">Satellit mode.</string>
     <string name="tst_mapmode">Mappe mode.</string>
     <string name="pup_areyousure">Sind Sie sicher?</string>
+    <string name="ttl_settings">EINSTELLUNGEN</string>
+    <string name="menu_title">HAUPTMENU</string>
+    <string name="menu_lists">MEINE KAUFLISTE</string>
+    <string name="menu_stores">GESCHÄFTE</string>
+    <string name="menu_bcd">BARCODE SCANNER</string>
+    <string name="menu_map">MAPPE</string>
+    <string name="menu_products">PRODUKTE</string>
+    <string name="menu_manufacturers">HERSTELLER</string>
+    <string name="menu_exit">AUSGANG</string>
+    <string name="tst_restart">Starten sie das App neu.</string>
 </resources>

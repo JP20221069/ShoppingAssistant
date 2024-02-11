@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsFragment" >
+
+    <ImageButton
+        android:id="@+id/ibSLO"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="384dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/civil_ensign_of_slovenia_svg"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibGER"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="384dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/download"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibSR"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="252dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/flag_of_serbia__20042010__svg"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibENG"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="128dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/_60_f_113258524_vitlynmjcbpevjcgsdmd3gbxahk3mech"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibSC"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="252dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sh_flag"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="180dp"
+        android:text="@string/ttl_settings"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/ttl_settings" />
+</androidx.constraintlayout.widget.ConstraintLayout>

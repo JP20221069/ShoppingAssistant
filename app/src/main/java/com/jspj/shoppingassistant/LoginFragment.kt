@@ -1,5 +1,6 @@
 package com.jspj.shoppingassistant
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,8 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setlocale("en")
+        val sharedPref = context?.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        sharedPref?.getString("LANG","en")?.let { setlocale(it) };
     }
 
     override fun onCreateView(

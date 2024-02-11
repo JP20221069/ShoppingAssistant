@@ -8,22 +8,73 @@
     tools:context=".MainMenuFragment">
 
     <TextView
-        android:id="@+id/tw"
+        android:id="@+id/tw2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="22dp"
-        android:text="MAIN MENU"
+        android:layout_marginTop="100dp"
+        android:text="@string/menu_lists"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tw2"
+        android:id="@+id/tw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="100dp"
-        android:text="MY LISTS"
+        android:layout_marginTop="22dp"
+        android:text="@string/menu_title"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tw8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="556dp"
+        android:text="@string/menu_manufacturers"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tw7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="556dp"
+        android:text="@string/menu_exit"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tw9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="252dp"
+        android:text="@string/ttl_settings"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tw6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        android:text="@string/menu_bcd"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,9 +82,11 @@
         android:id="@+id/tw3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="240dp"
         android:layout_marginTop="100dp"
-        android:text="PRODUCTS"
+        android:text="@string/menu_products"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.729"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,9 +94,11 @@
         android:id="@+id/tw4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="252dp"
         android:layout_marginTop="252dp"
-        android:text="STORES"
+        android:text="@string/menu_stores"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,9 +106,11 @@
         android:id="@+id/tw5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
         android:layout_marginTop="404dp"
-        android:text="MAP"
+        android:text="@string/menu_map"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,8 +143,8 @@
         android:layout_height="109dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="280dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/product"
+        android:scaleType="fitCenter"
+        android:src="@drawable/settings"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +154,7 @@
         android:layout_width="112dp"
         android:layout_height="109dp"
         android:layout_marginStart="224dp"
-        android:layout_marginTop="576dp"
+        android:layout_marginTop="584dp"
         android:scaleType="fitXY"
         android:src="@drawable/factory"
         android:visibility="visible"
@@ -109,9 +166,9 @@
         android:layout_width="112dp"
         android:layout_height="109dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="576dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/product"
+        android:layout_marginTop="584dp"
+        android:scaleType="center"
+        android:src="@drawable/exit"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

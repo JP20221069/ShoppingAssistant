@@ -119,7 +119,7 @@ class ProducerFragment : Fragment() {
             var adapter = CustomAdapter(data)
             adapter.setOnClickListener(object: CustomAdapter.OnClickListener{
                 override fun onClick(position: Int, model: ItemsViewModel) {
-                    var dir = ProductsViewFragmentDirections.actionProductsViewFragment2ToProductFragment(model.payload);
+                    var dir = ProducerFragmentDirections.actionProducerFragmentToProductFragment(model.payload);
                     navController.navigate(dir);
                 }
             })

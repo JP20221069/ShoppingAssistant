@@ -37,7 +37,7 @@
     <string name="ttl_manufacturers">Proizvajalec</string>
     <string name="tst_added_product">Izdelek dodan.</string>
     <string name="tst_no_product_selected">IZDELEK NI IZBRAN!</string>
-    <string name="tst_less_than_one">Upozorilo: ni mogoče unesti manj kot ena.</string>
+    <string name="tst_less_than_one">Opozorilo: ni mogoče vnesti manj kot enega.</string>
     <string name="tst_updated_item">Stavka posodobljena.</string>
     <string name="tst_error_log">Napaka pri prijavi.</string>
     <string name="tst_error_su">Napaka pri ustvarjanju računa.</string>
@@ -49,4 +49,14 @@
     <string name="tst_satellitemode">Satelitski pogled.</string>
     <string name="tst_mapmode">Prikaz mape.</string>
     <string name="pup_areyousure">Ali ste prepričani?</string>
+    <string name="ttl_settings">NASTAVITVE</string>
+    <string name="menu_title">GLAVNI MENI</string>
+    <string name="menu_lists">MOJI SEZNAMI</string>
+    <string name="menu_stores">TRGOVINE</string>
+    <string name="menu_bcd">BAR KOD SKENER</string>
+    <string name="menu_map">MAPA</string>
+    <string name="menu_products">PROIZVODI</string>
+    <string name="menu_manufacturers">PROIZVAJALCI</string>
+    <string name="menu_exit">IZLAZ</string>
+    <string name="tst_restart">Znova zaženite aplikaciju.</string>
 </resources>

@@ -52,5 +52,15 @@
         <string name="tst_satellitemode">Satellite mode.</string>
         <string name="tst_mapmode">Map mode.</string>
         <string name="pup_areyousure">Are you sure?</string>
+        <string name="ttl_settings">SETTINGS</string>
+        <string name="menu_title">MAIN MENU</string>
+        <string name="menu_lists">MY LISTS</string>
+        <string name="menu_stores">STORES</string>
+        <string name="menu_bcd">BARCODE SCANNER</string>
+        <string name="menu_map">MAP</string>
+        <string name="menu_products">PRODUCTS</string>
+        <string name="menu_manufacturers">MANUFACTURERS</string>
+        <string name="menu_exit">EXIT</string>
+        <string name="tst_restart">Restart app.</string>
         <!-- TODO: Remove or change this placeholder text -->
 </resources>

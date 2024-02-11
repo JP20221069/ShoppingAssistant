@@ -59,6 +59,15 @@ class MainMenuFragment : Fragment() {
         binding.ibProducers.setOnClickListener {
             navController.navigate(R.id.action_mainMenuFragment_to_producersViewFragment)
         }
+
+        binding.ibSettings.setOnClickListener {
+            navController.navigate(R.id.action_mainMenuFragment_to_settingsFragment)
+        }
+
+        binding.ibQuit.setOnClickListener {
+            activity?.finishAndRemoveTask();
+        }
+
     }
 
     override fun onCreateView(

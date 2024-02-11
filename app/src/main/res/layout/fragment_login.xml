@@ -138,11 +138,11 @@
         android:id="@+id/linkSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="368dp"
         android:text="@string/lnk_signup"
         android:textAppearance="@style/Theme.ShoppingAssistant.Link"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,16 @@
     <string name="tst_satellitemode">Сателитски приказ.</string>
     <string name="tst_mapmode">Приказ мапе.</string>
     <string name="pup_areyousure">Да ли сте сигурни?</string>
+    <string name="ttl_settings">ПОСТАВКЕ</string>
+    <string name="menu_title">ГЛАВНИ МЕНИ</string>
+    <string name="menu_lists">МОЈИ СПИСКОВИ</string>
+    <string name="menu_stores">ПРОДАВНИЦЕ</string>
+    <string name="menu_bcd">БАР КОД ЧИТАЧ</string>
+    <string name="menu_map">МАПА</string>
+    <string name="menu_products">ПРОИЗВОДИ</string>
+    <string name="menu_manufacturers">ПРОИЗВОЂАЧИ</string>
+    <string name="menu_exit">ИЗЛАЗ</string>
+    <string name="tst_restart">Поново покрените апликацију.</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
