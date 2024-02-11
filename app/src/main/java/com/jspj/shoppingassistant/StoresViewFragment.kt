@@ -10,38 +10,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.adapter.CustomAdapter
 import com.jspj.shoppingassistant.controller.ShoppingAssistantController
-import com.jspj.shoppingassistant.databinding.FragmentProductBinding
-import com.jspj.shoppingassistant.databinding.FragmentProductsViewBinding
+import com.jspj.shoppingassistant.databinding.FragmentMainMenuBinding
+import com.jspj.shoppingassistant.databinding.FragmentStoresViewBinding
 import com.jspj.shoppingassistant.model.ItemsViewModel
-import com.jspj.shoppingassistant.model.Product
+import com.jspj.shoppingassistant.model.ShoppingList
 import com.jspj.shoppingassistant.model.Store
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ProductsViewFragment.newInstance] factory method to
+ * Use the [StoresViewFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProductsViewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private lateinit var binding: FragmentProductsViewBinding
+class StoresViewFragment : Fragment() {
+    private lateinit var binding: FragmentStoresViewBinding
     private lateinit var navController: NavController
-    private lateinit var searchCriteria:String;
-    private lateinit var ProductList:List<Product>
-    private val args:ProductsViewFragmentArgs by navArgs();
+    private var searchCriteria="";
+    private lateinit var Stores:List<Store>;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,23 +52,18 @@ class ProductsViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentProductsViewBinding.inflate(inflater, container, false)
+        binding = FragmentStoresViewBinding.inflate(inflater, container, false)
         return binding.root;
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Init();
         navController= Navigation.findNavController(view)
-        val recyclerview = binding.rwProducts;
-        val TH : ToastHandler = ToastHandler(requireContext());
-        recyclerview.layoutManager = LinearLayoutManager(context)
-        var products:List<Product> = ArrayList();
-
-        UpdateUI();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
         UpdateData();
+        UpdateUI();
 
-        binding.ibSearch.setOnClickListener{
+        binding.ibSearch.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
             builder.setTitle(R.string.ttl_search).setIcon(R.drawable.magnifier)
             val input = EditText(requireContext());
@@ -78,82 +72,73 @@ class ProductsViewFragment : Fragment() {
             builder.setView(input)
             builder.setPositiveButton(R.string.btn_ok,
                 DialogInterface.OnClickListener { dialog, which ->searchCriteria = input.text.toString(); FilterData()})
-            builder.setNeutralButton(R.string.btn_remove_filter,DialogInterface.OnClickListener{dialog,which->FilterData(true)})
+            builder.setNeutralButton(R.string.btn_remove_filter,
+                DialogInterface.OnClickListener{ dialog, which->FilterData(true)})
             builder.setNegativeButton(R.string.btn_cancel,
                 DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
             builder.show()
         }
-
     }
+
 
     private fun UpdateData()
     {
         val ctrl: ShoppingAssistantController = ShoppingAssistantController();
         var TH: ToastHandler = ToastHandler(requireContext())
-        var recyclerView = binding.rwProducts;
+        var recyclerView = binding.rwStores;
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val storeid = args.STOREID;
-        lifecycleScope.launch(Dispatchers.Main) {
-            var products:List<Product> = listOf();
-            if(storeid=="-1")
-            {
-                products=ctrl.getProducts();
-            }
-            else
-            {
-                products=ctrl.getProductsByStore(storeid);
-                binding.twStoreName.text=ctrl.getStoreById(args.STOREID)!!.Name;
-            }
-            ProductList=products;
-            var data:ArrayList<ItemsViewModel> = arrayListOf();
-            for(p in products)
-            {
-                data.add(ItemsViewModel(R.drawable.product,p.Name, p.ID.toString()))
-            }
-            var adapter = CustomAdapter(data)
-            adapter.setOnClickListener(object: CustomAdapter.OnClickListener{
-                override fun onClick(position: Int, model: ItemsViewModel) {
-                    var dir = ProductsViewFragmentDirections.actionProductsViewFragment2ToProductFragment(model.payload);
-                    navController.navigate(dir);
-                }
-            })
 
-            recyclerView.adapter=adapter;
+        lifecycleScope.launch(Dispatchers.Main) {
+            var sts = ctrl.getStores();
+            Stores=sts;
+            var data:ArrayList<ItemsViewModel> = arrayListOf();
+            for(p in sts)
+            {
+                data.add(ItemsViewModel(R.drawable.store,p.Name,p.ID.toString()))
+            }
+            SetAdapter(data);
         }
     }
 
     private fun FilterData(removeFilter:Boolean=false)
     {
-        var recyclerView = binding.rwProducts;
-        var data:ArrayList<ItemsViewModel> = arrayListOf();
-        for(p in ProductList)
-        {
-            if(p.Name.contains(searchCriteria) || removeFilter==true)
-            {
-                data.add(ItemsViewModel(R.drawable.product,p.Name,p.ID.toString()))
+        var data: ArrayList<ItemsViewModel> = arrayListOf();
+        for (p in Stores) {
+            if (p.Name.contains(searchCriteria) || removeFilter == true || searchCriteria=="") {
+                data.add(ItemsViewModel(R.drawable.store, p.Name, p.ID.toString()))
             }
         }
-        var adapter = CustomAdapter(data);
-        adapter.setOnClickListener(object: CustomAdapter.OnClickListener{
-            override fun onClick(position: Int, model: ItemsViewModel) {
-                var dir = ProductsViewFragmentDirections.actionProductsViewFragment2ToProductFragment(model.payload);
-                navController.navigate(dir);
-            }
-        })
-
-        recyclerView.adapter=adapter;
+        SetAdapter(data);
+        if(removeFilter)
+        {
+            searchCriteria="";
+        }
     }
 
     private fun UpdateUI()
     {
-        if(args.STOREID=="-1")
-        {
-            binding.twStoreName.visibility=View.INVISIBLE;
-        }
-        else
-        {
-            binding.twStoreName.visibility=View.VISIBLE;
-        }
+    }
+
+
+    private fun SetAdapter(data:ArrayList<ItemsViewModel>)
+    {
+        var recyclerView = binding.rwStores;
+        var adapter = CustomAdapter(data)
+        adapter.setOnClickListener(object: CustomAdapter.OnClickListener{
+            override fun onClick(position: Int, model: ItemsViewModel) {
+                var dir = StoresViewFragmentDirections.actionStoresViewFragmentToStoreFragment(model.payload);
+                navController.navigate(dir);
+            }
+        })
+        recyclerView.adapter=adapter;
+    }
+
+    private fun updateCardBackgroundColor(position: Int,color:Int) {
+        // Update the background color of the clicked card
+        // You can access the card at the specified position and modify its background color
+        var recyclerView = binding.rwStores;
+        val cardView = recyclerView.layoutManager?.findViewByPosition(position)?.findViewById<CardView>(R.id.cardview)
+        cardView?.setCardBackgroundColor(resources.getColor(color))
     }
 
     companion object {
@@ -163,13 +148,15 @@ class ProductsViewFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductsViewFragment.
+         * @return A new instance of fragment StoresViewFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ProductsViewFragment().apply {
+            StoresViewFragment().apply {
                 arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }

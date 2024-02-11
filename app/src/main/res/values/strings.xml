@@ -17,6 +17,8 @@
     <string name="lbl_store">Store</string>
     <string name="lbl_total">TOTAL:</string>
     <string name="lbl_username">Username</string>
+    <string name="lbl_description">Description:</string>
+    <string name="lbl_manufacturer">MANUFACTURER:</string>
     <string name="lnk_signup">Sign up</string>
     <string name="ttl_add_list">ADD A LIST</string>
     <string name="ttl_dont_have_account">Don\'t have an account?</string>
@@ -26,6 +28,11 @@
     <string name="ttl_select_a_product">SELECT A PRODUCT</string>
     <string name="ttl_search">Search</string>
     <string name="ttl_question">Question</string>
+    <string name="ttl_stores">Stores</string>
+    <string name="ttl_products">Products</string>
+    <string name="ttl_map">Map</string>
+    <string name="ttl_pricesandstores">Prices and stores</string>
+    <string name="ttl_information">Information</string>
 
     <!--TOASTS AND POPUPS-->
     <string name="tst_added_product">Added product.</string>
@@ -36,6 +43,13 @@
     <string name="tst_error_su">Error signing up.</string>
     <string name="tst_updated_list">Updated list.</string>
     <string name="tst_removed_list_item">Removed list item(s).</string>
+    <string name="tst_showmanufacturers">Showing manufacturers.</string>
+    <string name="tst_showstores">Showing stores.</string>
+    <string name="tst_showboth">Showing stores and manufacturers.</string>
+    <string name="tst_satellitemode">Satellite mode.</string>
+    <string name="tst_mapmode">Map mode.</string>
     <string name="pup_areyousure">Are you sure?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

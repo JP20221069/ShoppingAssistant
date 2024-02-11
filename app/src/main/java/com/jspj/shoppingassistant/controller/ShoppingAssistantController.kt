@@ -2,6 +2,7 @@ package com.jspj.shoppingassistant.controller
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.animation.core.snap
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -56,17 +57,38 @@ class ShoppingAssistantController()
             val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS")
 
             val productList = mutableListOf<Product>()
-            val id:Double=0.0;
             val query = databaseReference.orderByChild("producer").equalTo(ProducerID.toDouble());
             val snapshot: DataSnapshot = query.get().await()
             for (productSnapshot in snapshot.children) {
-                // val product = productSnapshot.getValue(Product::class.java)
-                //product?.let { productList.add(it) }
+
+
                 var product = Product();
                 product.ID = productSnapshot.child("id").getValue(Int::class.java)!!;
                 product.Name = productSnapshot.child("name").getValue(String::class.java)!!;
                 product.Description=productSnapshot.child("description").getValue(String::class.java)!!;
                 product.Producer=getProducerById(productSnapshot.child("producer").getValue(Int::class.java)!!.toString())
+                productList.add(product);
+            }
+
+            return productList;
+
+        } catch (e: DatabaseException) {
+            println(e.message)
+            return emptyList();
+        }
+    }
+    suspend fun getProductsByStore(StoreID: String): List<Product> {
+        return try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("PRICES/"+StoreID)
+
+            val productList = mutableListOf<Product>()
+            val query = databaseReference.orderByKey();
+            val snapshot: DataSnapshot = query.get().await()
+            for (productSnapshot in snapshot.children) {
+
+                var productid = productSnapshot.key;
+                var product = Product();
+                product = getProductById(productid!!)!!;
                 productList.add(product);
             }
 
@@ -94,6 +116,43 @@ class ShoppingAssistantController()
             emptyList()
         }
     }
+
+    suspend fun getStoreIDs(): List<String> {
+        try {
+            val databaseReference: DatabaseReference = DBinstance.getReference("STORES")
+            val snapshot: DataSnapshot = databaseReference.get().await()
+            val ret = mutableListOf<String>()
+            for (storeSnapshot in snapshot.children) {
+                val storeid = storeSnapshot.key;
+                storeid?.let { ret.add(it) }
+            }
+
+            return ret
+        } catch (e: DatabaseException) {
+            println(e.message)
+            return emptyList()
+        }
+    }
+
+    suspend fun getStoresByProduct(ProductID: String): List<Store> {
+       return try {
+           val storeList = mutableListOf<Store>()
+           val storeIDs:List<String> = getStoreIDs();
+           for(str in storeIDs) {
+               val databaseReference: DatabaseReference = DBinstance.getReference("PRICES/"+str+"/"+ProductID)
+               val snapshot: DataSnapshot = databaseReference.get().await();
+               if(snapshot.exists())
+               {
+                   storeList.add(getStoreById(str)!!);
+               }
+           }
+            return storeList;
+
+        } catch (e: DatabaseException) {
+            println(e.message)
+            return emptyList();
+        }
+    }
     suspend fun getStoreById(StoreID: String): Store? {
         return try {
             val databaseReference: DatabaseReference = DBinstance.getReference("STORES")
@@ -115,6 +174,8 @@ class ShoppingAssistantController()
             null
         }
     }
+
+
     suspend fun getPriceForProduct(ProductID:String,StoreID:String): Price? {
         return try {
             val databaseReference: DatabaseReference = DBinstance.getReference("PRICES/"+StoreID+"/"+ProductID)

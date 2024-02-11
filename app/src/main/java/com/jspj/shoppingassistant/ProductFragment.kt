@@ -9,10 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.adapter.CustomAdapter
@@ -20,6 +21,7 @@ import com.jspj.shoppingassistant.controller.ShoppingAssistantController
 import com.jspj.shoppingassistant.databinding.FragmentProductBinding
 import com.jspj.shoppingassistant.model.ItemsViewModel
 import com.jspj.shoppingassistant.model.Product
+import com.jspj.shoppingassistant.model.Store
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,7 +40,9 @@ class ProductFragment : Fragment() {
     private lateinit var binding: FragmentProductBinding
     private lateinit var navController: NavController
     private lateinit var searchCriteria:String;
-    private lateinit var ProductList:List<Product>
+    private lateinit var StoreList:List<Store>
+    private lateinit var Product: Product;
+    private val args:ProductFragmentArgs by navArgs();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,34 +63,11 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Init();
-
-        val recyclerview = binding.recyclerview;
+        navController= Navigation.findNavController(view)
         val TH : ToastHandler = ToastHandler(requireContext());
-        // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(context)
-        var products:List<Product> = ArrayList();
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController()
-        UpdateData()
+        UpdateData();
 
-        binding.bttest.setOnClickListener{
-            //val ctrl:ShoppingAssistantController = ShoppingAssistantController();
-           // val ctrl:SQLController = SQLController();
-            //var test: MutableList<ShoppingList> = mutableListOf(ShoppingList());
-             var test:List<Product> = mutableListOf(Product());
-            //var test:String="FAILED";
-            lifecycleScope.launch(Dispatchers.Main) {
-                test=ctrl.getProductsByProducer("0");
-                //test= ctrl.getListsByUser(ctrl.getUID()!!);
-             //   test = ctrl.fetchDataAsync().first();
-            }.invokeOnCompletion {
-                TH.showToast(test.first().Name, Toast.LENGTH_SHORT);
-            }
-            //TH.showToast(ctrl.getUID(),Toast.LENGTH_SHORT);
-
-
-        }
-
-        binding.btFind.setOnClickListener{
+        binding.ibSearch.setOnClickListener{
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
             builder.setTitle(R.string.ttl_search).setIcon(R.drawable.search)
             val input = EditText(requireContext());
@@ -100,9 +81,15 @@ class ProductFragment : Fragment() {
             builder.show()
         }
 
-        binding.btRemoveFilter.setOnClickListener{
-            FilterData(true);
+        binding.ibDetails.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_information).setIcon(R.drawable.information)
+            builder.setMessage(getString(R.string.lbl_description)+" "+Product.Description+"\n"+getString(R.string.lbl_manufacturer)+" "+Product.Producer!!.Name + " , "+ Product.Producer!!.Address);
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel()})
+            builder.show()
         }
+
     }
 
     private fun UpdateData()
@@ -110,19 +97,25 @@ class ProductFragment : Fragment() {
         val ctrl:ShoppingAssistantController = ShoppingAssistantController();
         var TH:ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.recyclerview;
+        // this creates a vertical layout Manager
         recyclerView.layoutManager = LinearLayoutManager(context)
         lifecycleScope.launch(Dispatchers.Main) {
-            var products:List<Product> = ctrl.getProducts();
-            ProductList=products;
+            var product = ctrl.getProductById(args.PRODUCTID);
+            Product=product!!;
+            binding.twTitle.text=product?.Name;
+            binding.twManufacturer.text=product?.Producer?.Name;
+            var stores:List<Store> = ctrl.getStoresByProduct(args.PRODUCTID);
+            StoreList=stores;
             var data:ArrayList<ItemsViewModel> = arrayListOf();
-            for(p in products)
+            for(p in stores)
             {
-                data.add(ItemsViewModel(R.drawable.product,p.Name, p.ID.toString()))
+                data.add(ItemsViewModel(R.drawable.store,p.Name + "\t("+ ctrl.getPriceForProduct(args.PRODUCTID,p.ID.toString())!!.Price.toString()+")", p.ID.toString()))
             }
             var adapter = CustomAdapter(data)
             adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
                 override fun onClick(position: Int, model: ItemsViewModel) {
-                    
+                    var dir = ProductFragmentDirections.actionProductFragmentToStoreFragment(model.payload);
+                    navController.navigate(dir);
                 }
             })
 
@@ -134,17 +127,22 @@ class ProductFragment : Fragment() {
     {
         var recyclerView = binding.recyclerview;
         var data:ArrayList<ItemsViewModel> = arrayListOf();
-        for(p in ProductList)
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        lifecycleScope.launch(Dispatchers.Main)
+        {
+        for(p in StoreList)
         {
             if(p.Name.contains(searchCriteria) || removeFilter==true)
             {
-                data.add(ItemsViewModel(R.drawable.product,p.Name,p.ID.toString()))
+                data.add(ItemsViewModel(R.drawable.store,p.Name + "\t("+ ctrl.getPriceForProduct(args.PRODUCTID,p.ID.toString())!!.Price.toString()+")", p.ID.toString()))
             }
+        }
         }
         var adapter = CustomAdapter(data);
         adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
             override fun onClick(position: Int, model: ItemsViewModel) {
-
+                var dir = ProductFragmentDirections.actionProductFragmentToStoreFragment(model.payload);
+                navController.navigate(dir);
             }
         })
 

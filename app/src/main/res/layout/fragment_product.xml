@@ -6,44 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".ProductFragment">
 
+    <ImageButton
+        android:id="@+id/ibDetails"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="172dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/findproduct"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibManufacturer"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="172dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/filterfactory"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibSearch"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="296dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/magnifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="413dp"
-        android:layout_height="625dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="408dp"
+        android:layout_height="381dp"
+        android:layout_marginTop="348dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/card_view_design" />
 
-    <Button
-        android:id="@+id/bttest"
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="290dp" />
+
+    <TextView
+        android:id="@+id/twTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="23dp"
-        android:text="Button"
-        android:visibility="visible"
+        android:layout_marginTop="16dp"
+        android:text="PRODUCT NAME"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btFind"
+    <TextView
+        android:id="@+id/twlblManufacturer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="21dp"
-        android:text="FIND"
-        app:layout_constraintStart_toEndOf="@+id/bttest"
+        android:layout_marginTop="104dp"
+        android:text="@string/lbl_manufacturer"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btRemoveFilter"
+    <TextView
+        android:id="@+id/twManufacturer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="20dp"
-        android:text="Remove Filter"
-        app:layout_constraintStart_toEndOf="@+id/bttest"
+        android:layout_marginTop="104dp"
+        android:text="@string/lbl_manufacturer"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/twTitlePrices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="312dp"
+        android:text="@string/ttl_pricesandstores"
+        android:textAppearance="@style/Theme.ShoppingAssistant.Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,6 +37,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tw4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="252dp"
+        android:text="STORES"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tw5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="404dp"
+        android:text="MAP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/ibLists"
         android:layout_width="112dp"
@@ -61,14 +81,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/ib3"
+        android:id="@+id/ibSettings"
         android:layout_width="112dp"
         android:layout_height="109dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="280dp"
         android:scaleType="fitXY"
         android:src="@drawable/product"
-        android:visibility="invisible"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibMap"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="436dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/map"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibStores"
+        android:layout_width="112dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="280dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/store"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
