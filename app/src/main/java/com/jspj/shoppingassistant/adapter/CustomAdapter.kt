@@ -15,7 +15,7 @@ import com.jspj.shoppingassistant.R.*
 
 class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
-
+    public val data=mList;
     private var onClickListener: OnClickListener? = null
     private var onLongClickListener: OnLongClickListener?=null
     private lateinit var holder:ViewHolder;

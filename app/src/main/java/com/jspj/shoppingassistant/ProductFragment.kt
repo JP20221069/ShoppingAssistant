@@ -90,6 +90,11 @@ class ProductFragment : Fragment() {
             builder.show()
         }
 
+        binding.ibManufacturer.setOnClickListener {
+          var dir = ProductFragmentDirections.actionProductFragmentToProducerFragment(Product.Producer?.ID.toString());
+            navController.navigate(dir);
+        }
+
     }
 
     private fun UpdateData()

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -33,6 +34,7 @@ private const val ARG_PARAM2 = "param2"
 class ScannerFragment : Fragment() {
     private lateinit var binding: FragmentScannerBinding;
     private lateinit var navController: NavController;
+    private val args:ScannerFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,20 +59,14 @@ class ScannerFragment : Fragment() {
 
         }
         binding.btSimulate.setOnClickListener{
-            SimulateScan();
+            ScanCode();
         }
     }
 
-    private fun SimulateScan()
+  /*  private fun SimulateScan()
     {
-        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
-        lifecycleScope.launch(Dispatchers.Main){
-            var p: Product = ctrl.getProductByBarcode("123")!!
-            var dir = ScannerFragmentDirections.actionScannerFragmentToProductFragment(p.ID.toString());
-            navController.navigate(dir);
 
-        }
-    }
+    }*/
 
     private fun ScanCode() {
         val options = ScanOptions()
@@ -84,12 +80,16 @@ class ScannerFragment : Fragment() {
         ScanContract()
     ) { result: ScanIntentResult ->
         if (result.contents != null) {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-            builder.setTitle("Result")
-            builder.setMessage(result.contents)
-            builder.setPositiveButton("OK",
-                DialogInterface.OnClickListener { dialogInterface, i -> dialogInterface.dismiss() })
-                .show()
+            var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+            var p: Product? =null;
+            lifecycleScope.launch(Dispatchers.Main)
+            {
+                p=ctrl.getProductByBarcode(result.contents)!!
+            }.invokeOnCompletion {
+                var dir =
+                    ScannerFragmentDirections.actionScannerFragmentToProductFragment(p?.ID.toString());
+                navController.navigate(dir);
+            }
         }
     }
 

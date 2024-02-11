@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.jspj.shoppingassistant.Utils.LocaleManager
 import com.jspj.shoppingassistant.databinding.FragmentMainMenuBinding
-import com.jspj.shoppingassistant.databinding.FragmentProductBinding
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,15 +25,16 @@ class MainMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentMainMenuBinding
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         navController= Navigation.findNavController(view)
         binding.ibProducts.setOnClickListener{
             navController.navigate(R.id.action_mainMenuFragment_to_productsViewFragment2);

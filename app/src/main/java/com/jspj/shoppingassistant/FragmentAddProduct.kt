@@ -3,6 +3,8 @@ package com.jspj.shoppingassistant
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.InputType
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
@@ -17,6 +19,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
+import com.journeyapps.barcodescanner.ScanOptions
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.adapter.CustomAdapter
 import com.jspj.shoppingassistant.controller.ShoppingAssistantController
@@ -48,6 +53,7 @@ class FragmentAddProduct : Fragment() {
     private var selectmode:Boolean=false;
     private var searchCriteria:String="";
     private var Products:List<Product> = mutableListOf()
+    private var scanflag = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +79,8 @@ class FragmentAddProduct : Fragment() {
         np.value=1;
         var recyclerView = binding.rwProducts;
         recyclerView.layoutManager = LinearLayoutManager(context)
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
         UpdateData()
-
 
         binding.btConfirm.setOnClickListener{
 
@@ -100,6 +106,13 @@ class FragmentAddProduct : Fragment() {
                     TH.showToast(R.string.tst_no_product_selected, Toast.LENGTH_SHORT)
                 }
             }
+        }
+
+        binding.ibScan.setOnClickListener {
+
+            ScanCode()
+
+
         }
 
         binding.ibSearch.setOnClickListener {
@@ -160,9 +173,16 @@ class FragmentAddProduct : Fragment() {
             }
         }
         SetAdapter(data);
+
         if(removeFilter)
         {
             searchCriteria="";
+        }
+        if(scanflag==true) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                updateCardBackgroundColor(0, R.color.sys_selection)
+                scanflag = false
+            }, 100)
         }
     }
 
@@ -184,8 +204,53 @@ class FragmentAddProduct : Fragment() {
                 updateCardBackgroundColor(position,R.color.sys_selection);
             }
         })
+
         recyclerView.adapter = adapter;
 
+
+    }
+
+    /*private fun SimulateScan()
+    {
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+        var p: Product? =null;
+        lifecycleScope.launch(Dispatchers.Main)
+        {
+            p=ctrl.getProductByBarcode("123")!!
+        }.invokeOnCompletion {
+            searchCriteria= p?.Name!!;
+            selectedProduct=p;
+            selectedIndex=Products.indexOf(p);
+            scanflag=true;
+            FilterData();
+        }
+    }*/
+
+    private fun ScanCode() {
+        val options = ScanOptions()
+        options.setPrompt("Volume up to flash on")
+        options.setBeepEnabled(true)
+        options.setOrientationLocked(true)
+        options.setCaptureActivity(CaptureAct::class.java)
+        barLaucher.launch(options)
+    }
+    var barLaucher = registerForActivityResult<ScanOptions, ScanIntentResult>(
+        ScanContract()
+    ) { result: ScanIntentResult ->
+        if (result.contents != null) {
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var p: Product? = null;
+            lifecycleScope.launch(Dispatchers.Main)
+            {
+                p = ctrl.getProductByBarcode(result.contents)!!
+            }.invokeOnCompletion {
+                searchCriteria = p?.Name!!;
+                selectedProduct = p;
+                selectedIndex = Products.indexOf(p);
+                scanflag = true;
+                FilterData();
+            }
+        }
     }
     companion object {
         /**

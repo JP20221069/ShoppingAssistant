@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <!-- TITLES AND LABELS: -->
+        <string name="btn_confirm">CONFIRM</string>
+        <string name="btn_login">Log in</string>
+        <string name="btn_ok">OK</string>
+        <string name="btn_cancel">Cancel</string>
+        <string name="btn_remove_filter">Remove filter</string>
+        <string name="btn_yes">Yes</string>
+        <string name="btn_no">No</string>
+        <string name="lbl_amount">AMOUNT:</string>
+        <string name="lbl_list_name">List name</string>
+        <string name="lbl_notes">NOTES:</string>
+        <string name="lbl_password">Password</string>
+        <string name="lbl_price">PRICE:</string>
+        <string name="lbl_repass">Repeat Password</string>
+        <string name="lbl_store">Store</string>
+        <string name="lbl_total">TOTAL:</string>
+        <string name="lbl_username">Username</string>
+        <string name="lbl_description">Description:</string>
+        <string name="lbl_manufacturer">MANUFACTURER:</string>
+        <string name="lbl_barcode">Barcode:</string>
+        <string name="lbl_address">Address:</string>
+        <string name="lnk_signup">Sign up</string>
+        <string name="ttl_add_list">ADD A LIST</string>
+        <string name="ttl_dont_have_account">Don\'t have an account?</string>
+        <string name="ttl_greeting">Welcome to Shopping Assistant!</string>
+        <string name="ttl_my_shopping_lists">My shopping lists</string>
+        <string name="ttl_newuser_message">Create your Shopping Assistant account!</string>
+        <string name="ttl_select_a_product">SELECT A PRODUCT</string>
+        <string name="ttl_search">Search</string>
+        <string name="ttl_question">Question</string>
+        <string name="ttl_stores">Stores</string>
+        <string name="ttl_products">Products</string>
+        <string name="ttl_map">Map</string>
+        <string name="ttl_pricesandstores">Prices and stores</string>
+        <string name="ttl_information">Information</string>
+        <string name="ttl_manufacturers">Manufacturers</string>
+
+        <!--TOASTS AND POPUPS-->
+        <string name="tst_added_product">Added product.</string>
+        <string name="tst_no_product_selected">NO PRODUCT SELECTED!</string>
+        <string name="tst_less_than_one">Cannot lower amount less than one.</string>
+        <string name="tst_updated_item">Updated item.</string>
+        <string name="tst_error_log">Error logging in.</string>
+        <string name="tst_error_su">Error signing up.</string>
+        <string name="tst_updated_list">Updated list.</string>
+        <string name="tst_removed_list_item">Removed list item(s).</string>
+        <string name="tst_showmanufacturers">Showing manufacturers.</string>
+        <string name="tst_showstores">Showing stores.</string>
+        <string name="tst_showboth">Showing stores and manufacturers.</string>
+        <string name="tst_satellitemode">Satellite mode.</string>
+        <string name="tst_mapmode">Map mode.</string>
+        <string name="pup_areyousure">Are you sure?</string>
+        <!-- TODO: Remove or change this placeholder text -->
+</resources>

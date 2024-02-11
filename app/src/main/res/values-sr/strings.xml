@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TITLES AND LABELS: -->
+    <string name="btn_confirm">ПОТВРДИ</string>
+    <string name="btn_login">ПРИЈАВА</string>
+    <string name="btn_ok">У реду</string>
+    <string name="btn_cancel">Откажи</string>
+    <string name="btn_remove_filter">Склони филтер</string>
+    <string name="btn_yes">Да</string>
+    <string name="btn_no">Не</string>
+    <string name="lbl_amount">КОЛИЧИНА:</string>
+    <string name="lbl_list_name">Име листе</string>
+    <string name="lbl_notes">БЕЛЕШКЕ:</string>
+    <string name="lbl_password">Лозинка</string>
+    <string name="lbl_price">ЦЕНА:</string>
+    <string name="lbl_repass">Поновите лозинку</string>
+    <string name="lbl_store">Продавница</string>
+    <string name="lbl_total">УКУПНО:</string>
+    <string name="lbl_username">Корисничко име</string>
+    <string name="lbl_description">Опис:</string>
+    <string name="lbl_manufacturer">ПРОИЗВОЂАЧ:</string>
+    <string name="lbl_barcode">Бар код:</string>
+    <string name="lbl_address">Адреса:</string>
+    <string name="lnk_signup">Пријавите се</string>
+    <string name="ttl_add_list">ДОДАЈ ЛИСТУ</string>
+    <string name="ttl_dont_have_account">Немате налог?</string>
+    <string name="ttl_greeting">Добро дошли у Шопинг Асистент!</string>
+    <string name="ttl_my_shopping_lists">Моји спискови</string>
+    <string name="ttl_newuser_message">Направите свој Шопинг Асистент налог!</string>
+    <string name="ttl_select_a_product">ИЗАБЕРИТЕ ПРОИЗВОД</string>
+    <string name="ttl_search">ПРЕТРАГА</string>
+    <string name="ttl_question">Питање</string>
+    <string name="ttl_stores">Продавнице</string>
+    <string name="ttl_products">Производи</string>
+    <string name="ttl_map">Мапа</string>
+    <string name="ttl_pricesandstores">Цене и продавнице</string>
+    <string name="ttl_information">Информације</string>
+    <string name="ttl_manufacturers">Произвођачи</string>
+
+    <!--TOASTS AND POPUPS-->
+    <string name="tst_added_product">Додат производ.</string>
+    <string name="tst_no_product_selected">ПРОИЗВОД НИЈЕ ИЗАБРАН!</string>
+    <string name="tst_less_than_one">Немогуће је снизити количину испод један.</string>
+    <string name="tst_updated_item">Ставка ажурирана.</string>
+    <string name="tst_error_log">Грешка приликом пријаве.</string>
+    <string name="tst_error_su">Грешка приликом креирања налога.</string>
+    <string name="tst_updated_list">Списак ажуриран.</string>
+    <string name="tst_removed_list_item">Уклоњена ставка/е.</string>
+    <string name="tst_showmanufacturers">Приказ произвођача.</string>
+    <string name="tst_showstores">Приказ продавница.</string>
+    <string name="tst_showboth">Приказ продавница и произвођача</string>
+    <string name="tst_satellitemode">Сателитски приказ.</string>
+    <string name="tst_mapmode">Приказ мапе.</string>
+    <string name="pup_areyousure">Да ли сте сигурни?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+</resources>

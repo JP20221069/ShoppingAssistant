@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import com.jspj.shoppingassistant.databinding.FragmentLoginBinding
 import android.graphics.Paint;
 import android.widget.Toast
+import androidx.core.text.layoutDirection
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jspj.shoppingassistant.Utils.LocaleManager
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +34,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setlocale("en")
     }
 
     override fun onCreateView(
@@ -44,6 +48,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         Init();
         navController= Navigation.findNavController(view)
         binding.linkSignUp.setOnClickListener{
@@ -77,6 +82,15 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, R.string.tst_error_log, Toast.LENGTH_SHORT).show()
 
         }
+    }
+
+    private fun setlocale(locale:String){
+        var locale = Locale(locale);
+        var resources=activity?.resources;
+        var config = resources?.configuration;
+        config?.setLocale(locale);
+        resources?.updateConfiguration(config,resources?.displayMetrics);
+        //(activity as? MainActivity)?.recreate()
     }
 
     companion object {

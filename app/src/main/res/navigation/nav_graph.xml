@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_productFragment_to_storeFragment"
             app:destination="@id/storeFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_producerFragment"
+            app:destination="@id/producerFragment" />
     </fragment>
     <fragment
         android:id="@+id/listsViewFragment"
@@ -106,6 +109,13 @@
         <action
             android:id="@+id/action_fragmentAddProduct_to_shoppingListFragment"
             app:destination="@id/shoppingListFragment" />
+        <argument
+            android:name="PRODUCTID"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_fragmentAddProduct_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
     </fragment>
     <fragment
         android:id="@+id/addListFragment"
@@ -194,6 +204,17 @@
         <action
             android:id="@+id/action_scannerFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <argument
+            android:name="CALLED_TO_ADD_PRODUCT"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_scannerFragment_to_fragmentAddProduct"
+            app:destination="@id/fragmentAddProduct" />
+        <argument
+            android:name="SH_LISTID"
+            app:argType="string"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/producersViewFragment"

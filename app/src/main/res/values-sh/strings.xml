@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TITLES AND LABELS: -->
+    <string name="btn_confirm">POTVRDI</string>
+    <string name="btn_login">Prijavite se</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Otkaži</string>
+    <string name="btn_remove_filter">Ukloni filter</string>
+    <string name="btn_yes">Da</string>
+    <string name="btn_no">Ne</string>
+    <string name="lbl_amount">KOLIČINA:</string>
+    <string name="lbl_list_name">Naziv liste</string>
+    <string name="lbl_notes">BELEŠKE:</string>
+    <string name="lbl_password">Lozinka</string>
+    <string name="lbl_price">CENA:</string>
+    <string name="lbl_repass">Ponovite lozinku</string>
+    <string name="lbl_store">Prodavnica</string>
+    <string name="lbl_total">UKUPNO:</string>
+    <string name="lbl_username">Kor. Ime</string>
+    <string name="lbl_description">Opis:</string>
+    <string name="lbl_manufacturer">PROIZVOĐAČ:</string>
+    <string name="lbl_barcode">Bar kod:</string>
+    <string name="lbl_address">Adresa:</string>
+    <string name="lnk_signup">Prijavite se</string>
+    <string name="ttl_add_list">DODAJ LISTU</string>
+    <string name="ttl_dont_have_account">Nemate nalog?</string>
+    <string name="ttl_greeting">Dobro došli u Shopping Assistant!</string>
+    <string name="ttl_my_shopping_lists">Moji spiskovi</string>
+    <string name="ttl_newuser_message">Napravite svoj Shopping Assistant nalog!</string>
+    <string name="ttl_select_a_product">IZABERITE PROIZVOD</string>
+    <string name="ttl_search">Pretraga</string>
+    <string name="ttl_question">Pitanje</string>
+    <string name="ttl_stores">Prodavnice</string>
+    <string name="ttl_products">Proizvodi</string>
+    <string name="ttl_map">Mapa</string>
+    <string name="ttl_pricesandstores">Cene i prodavnice</string>
+    <string name="ttl_information">Informacije</string>
+    <string name="ttl_manufacturers">Proizvođači</string>
+
+    <!--TOASTS AND POPUPS-->
+    <string name="tst_added_product">Dodat proizvod.</string>
+    <string name="tst_no_product_selected">PROIZVOD NIJE IZABRAN.</string>
+    <string name="tst_less_than_one">Nije moguće spustiti količinu ispod 1!</string>
+    <string name="tst_updated_item">Ažurirana stavka.</string>
+    <string name="tst_error_log">Greška u prijavi.</string>
+    <string name="tst_error_su">Greška u kreiranju naloga.</string>
+    <string name="tst_updated_list">Ažuriran spisak.</string>
+    <string name="tst_removed_list_item">Stavka/e uklonjena/e.</string>
+    <string name="tst_showmanufacturers">Prikaz proizvođača.</string>
+    <string name="tst_showstores">Prikaz prodavnica.</string>
+    <string name="tst_showboth">Prikaz prodavnica i proizvođača.</string>
+    <string name="tst_satellitemode">Satelitski mod.</string>
+    <string name="tst_mapmode">Prikaz mape.</string>
+    <string name="pup_areyousure">Jeste li sigurni?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

@@ -183,6 +183,7 @@ class ShoppingListFragment : Fragment() {
                 .setNegativeButton(R.string.btn_no, dialogClickListener).setTitle(R.string.ttl_question).setIcon(R.drawable.question).show()
         }
 
+
         binding.ibSearch.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.Theme_ShoppingAssistant_Dialog))
             builder.setTitle(R.string.ttl_search).setIcon(R.drawable.magnifier)
@@ -281,6 +282,7 @@ class ShoppingListFragment : Fragment() {
 
             binding.iwCart.visibility=View.INVISIBLE;
             binding.twPrice.visibility=View.INVISIBLE;
+
         } else {
 
             binding.ibDecProduct.visibility = View.INVISIBLE;
@@ -294,6 +296,7 @@ class ShoppingListFragment : Fragment() {
 
             binding.iwCart.visibility=View.VISIBLE;
             binding.twPrice.visibility=View.VISIBLE;
+
         }
     }
 

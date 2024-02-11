@@ -1,7 +1,10 @@
 package com.jspj.shoppingassistant
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jspj.shoppingassistant.Utils.LocaleManager
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

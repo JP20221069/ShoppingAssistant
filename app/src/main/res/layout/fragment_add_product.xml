@@ -18,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/ibScan"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/scanproduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <NumberPicker
         android:id="@+id/npAmount"
         style="@android:style/Widget.Material.NumberPicker"
