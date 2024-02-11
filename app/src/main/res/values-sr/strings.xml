@@ -16,7 +16,7 @@
     <string name="lbl_repass">Поновите лозинку</string>
     <string name="lbl_store">Продавница</string>
     <string name="lbl_total">УКУПНО:</string>
-    <string name="lbl_username">Корисничко име</string>
+    <string name="lbl_username">Кор. име</string>
     <string name="lbl_description">Опис:</string>
     <string name="lbl_manufacturer">ПРОИЗВОЂАЧ:</string>
     <string name="lbl_barcode">Бар код:</string>
