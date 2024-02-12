@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.controller.ShoppingAssistantController
 import com.jspj.shoppingassistant.databinding.FragmentScannerBinding
 import com.jspj.shoppingassistant.model.Product
@@ -54,20 +56,38 @@ class ScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view);
+        ScanCode();
         binding.bttest.setOnClickListener {
             ScanCode();
 
         }
         binding.btSimulate.setOnClickListener{
-            ScanCode();
+            SimulateScan();
         }
     }
 
-  /*  private fun SimulateScan()
+
+    private fun SimulateScan()
     {
-
-    }*/
-
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
+        var p: Product? =null;
+        lifecycleScope.launch(Dispatchers.Main)
+        {
+            p=ctrl.getProductByBarcode("999")
+        }.invokeOnCompletion {
+            if(p==null)
+            {
+                var TH: ToastHandler = ToastHandler(requireContext());
+                TH.showToast(getString(R.string.tst_noproductfound), Toast.LENGTH_SHORT);
+            }
+            else
+            {
+                var dir =
+                    ScannerFragmentDirections.actionScannerFragmentToProductFragment(p?.ID.toString());
+                navController.navigate(dir);
+            }
+        }
+    }
     private fun ScanCode() {
         val options = ScanOptions()
         options.setPrompt("Volume up to flash on")
@@ -80,15 +100,23 @@ class ScannerFragment : Fragment() {
         ScanContract()
     ) { result: ScanIntentResult ->
         if (result.contents != null) {
-            var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+            var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
             var p: Product? =null;
             lifecycleScope.launch(Dispatchers.Main)
             {
-                p=ctrl.getProductByBarcode(result.contents)!!
+                p=ctrl.getProductByBarcode(result.contents)
             }.invokeOnCompletion {
-                var dir =
-                    ScannerFragmentDirections.actionScannerFragmentToProductFragment(p?.ID.toString());
-                navController.navigate(dir);
+                if(p==null)
+                {
+                    var TH: ToastHandler = ToastHandler(requireContext());
+                    TH.showToast(getString(R.string.tst_noproductfound), Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    var dir =
+                        ScannerFragmentDirections.actionScannerFragmentToProductFragment(p?.ID.toString());
+                    navController.navigate(dir);
+                }
             }
         }
     }

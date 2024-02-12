@@ -51,8 +51,10 @@
     <string name="tst_showboth">Приказ продавница и произвођача</string>
     <string name="tst_satellitemode">Сателитски приказ.</string>
     <string name="tst_mapmode">Приказ мапе.</string>
+    <string name="tst_noproductfound">Производ није пронађен.</string>
     <string name="pup_areyousure">Да ли сте сигурни?</string>
     <string name="ttl_settings">ПОСТАВКЕ</string>
+    <string name="ttl_error">Грешка</string>
     <string name="menu_title">ГЛАВНИ МЕНИ</string>
     <string name="menu_lists">МОЈИ СПИСКОВИ</string>
     <string name="menu_stores">ПРОДАВНИЦЕ</string>
@@ -62,6 +64,7 @@
     <string name="menu_manufacturers">ПРОИЗВОЂАЧИ</string>
     <string name="menu_exit">ИЗЛАЗ</string>
     <string name="tst_restart">Поново покрените апликацију.</string>
+    <string name="tst_deletedlists">Обрисани спискови.</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

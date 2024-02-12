@@ -72,7 +72,7 @@ class ShoppingListFragment : Fragment() {
         UpdateUI();
         SelectedItems = mutableListOf();
         super.onViewCreated(view, savedInstanceState)
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH: ToastHandler = ToastHandler(requireContext())
         UpdateData()
         binding.ibAddProduct.setOnClickListener {
@@ -83,7 +83,7 @@ class ShoppingListFragment : Fragment() {
             for (i in SelectedItems) {
                 List.Products?.get(i)?.Amount = List.Products!![i]?.Amount?.plus(1)!!;
             }
-            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
             lifecycleScope.launch(Dispatchers.Main)
             {
                 ctrl.updateList(List);
@@ -203,7 +203,7 @@ class ShoppingListFragment : Fragment() {
     }
 
     private fun UpdateData() {
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH: ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.rwShoppingList;
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -243,7 +243,7 @@ class ShoppingListFragment : Fragment() {
     private fun FilterData(removeFilter:Boolean=false)
     {
         lifecycleScope.launch(Dispatchers.Main) {
-            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
             var data: ArrayList<ItemsViewModel> = arrayListOf();
             for (p in List.Products!!) {
                 if (p.Product?.Name?.contains(searchCriteria)!! || removeFilter == true || searchCriteria == "") {

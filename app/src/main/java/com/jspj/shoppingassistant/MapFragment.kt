@@ -128,7 +128,7 @@ class MapFragment : Fragment(),MapListener, GpsStatus.Listener {
         }
         else
         {
-            val ctrl:ShoppingAssistantController=ShoppingAssistantController();
+            val ctrl:ShoppingAssistantController=ShoppingAssistantController(requireContext());
             lifecycleScope.launch(Dispatchers.Main) {
 
 

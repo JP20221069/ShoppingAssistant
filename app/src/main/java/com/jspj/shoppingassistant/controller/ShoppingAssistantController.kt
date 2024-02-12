@@ -1,7 +1,13 @@
 package com.jspj.shoppingassistant.controller
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.text.InputType
 import android.util.Log
+import android.view.ContextThemeWrapper
+import android.widget.EditText
 import androidx.compose.animation.core.snap
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
@@ -10,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.jspj.shoppingassistant.R
 import com.jspj.shoppingassistant.Utils.ToastHandler
 import com.jspj.shoppingassistant.model.Price
 import com.jspj.shoppingassistant.model.Producer
@@ -24,10 +31,10 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
-class ShoppingAssistantController()
+class ShoppingAssistantController(ctx:Context)
 {
-    val DBinstance = FirebaseDatabase.getInstance();
-
+    val DBinstance = FirebaseDatabase.getInstance()
+    var ctx = ctx;
     suspend fun getProducts(): List<Product> {
         return try {
             val databaseReference: DatabaseReference = DBinstance.getReference("PRODUCTS")
@@ -49,6 +56,13 @@ class ShoppingAssistantController()
 
         } catch (e: DatabaseException) {
             println(e.message)
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return emptyList();
         }
     }
@@ -76,6 +90,12 @@ class ShoppingAssistantController()
 
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return emptyList();
         }
     }
@@ -98,6 +118,12 @@ class ShoppingAssistantController()
 
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return emptyList();
         }
     }
@@ -115,6 +141,12 @@ class ShoppingAssistantController()
             storeList
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             emptyList()
         }
     }
@@ -132,6 +164,12 @@ class ShoppingAssistantController()
             return ret
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return emptyList()
         }
     }
@@ -152,6 +190,12 @@ class ShoppingAssistantController()
 
         } catch (e: DatabaseException) {
             println(e.message)
+           val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+           builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+           builder.setMessage("test");
+           builder.setPositiveButton(R.string.btn_ok,
+               DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+           builder.show()
             return emptyList();
         }
     }
@@ -173,6 +217,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             null
         }
     }
@@ -196,6 +246,12 @@ class ShoppingAssistantController()
             }
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             null
         }
     }
@@ -223,6 +279,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return null
         }
     }
@@ -250,6 +312,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return null
         }
     }
@@ -271,6 +339,12 @@ class ShoppingAssistantController()
             return itemList
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             mutableListOf<ShoppingItem>();
         }
     }
@@ -299,6 +373,12 @@ class ShoppingAssistantController()
         {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             null
         }
     }
@@ -318,6 +398,12 @@ class ShoppingAssistantController()
         }
         catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             mutableListOf<ShoppingList>()
         }
     }
@@ -339,6 +425,12 @@ class ShoppingAssistantController()
         }
         catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return ""
         }
     }
@@ -356,6 +448,12 @@ class ShoppingAssistantController()
             return  producerList
         } catch (e: DatabaseException) {
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return emptyList()
         }
     }
@@ -378,6 +476,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             return null
         }
     }
@@ -398,27 +502,39 @@ class ShoppingAssistantController()
 
     suspend fun insertList(l:ShoppingList)
     {
-        val ref = DBinstance.getReference().child("LISTS/"+getUID())
-        val itemsMapList = l.Products?.map { item ->
-            mapOf(
-                "Product" to item.Product?.ID,
-                "Amount" to item.Amount,
-                "Notes" to item.Notes,
-                "Checked" to item.Checked
+        try {
+            val ref = DBinstance.getReference().child("LISTS/" + getUID())
+            val itemsMapList = l.Products?.map { item ->
+                mapOf(
+                    "Product" to item.Product?.ID,
+                    "Amount" to item.Amount,
+                    "Notes" to item.Notes,
+                    "Checked" to item.Checked
+                )
+            }
+
+            val updatedMap: Map<String, Any?> = mapOf(
+                "Items" to itemsMapList,
+                "Name" to l.Name,
+                "Store" to l.Store?.ID
             )
+
+            val newid = getLastListIDByUser(getUID()!!).toInt() + 1;
+            val insertMap: Map<String, Any?> = mapOf(
+                newid.toString() to updatedMap
+            )
+            ref.child(newid.toString()).setValue(updatedMap);
+        }
+        catch(e:DatabaseException)
+        {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
         }
 
-        val updatedMap: Map<String, Any?> = mapOf(
-            "Items" to itemsMapList,
-            "Name" to l.Name,
-            "Store" to l.Store?.ID
-        )
-
-        val newid = getLastListIDByUser(getUID()!!).toInt()+1;
-        val insertMap: Map<String,Any?> = mapOf(
-            newid.toString() to updatedMap
-        )
-        ref.child(newid.toString()).setValue(updatedMap);
     }
 
     suspend fun updateList(l:ShoppingList) : Boolean
@@ -446,6 +562,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
 
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             false
         }
     }
@@ -462,6 +584,12 @@ class ShoppingAssistantController()
         } catch (e: DatabaseException) {
             // Handle exceptions, e.g., permission denied, network issues, etc.
             println(e.message)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(ContextThemeWrapper(ctx,R.style.Theme_ShoppingAssistant_Dialog))
+            builder.setTitle(R.string.ttl_error).setIcon(R.drawable.critical)
+            builder.setMessage("test");
+            builder.setPositiveButton(R.string.btn_ok,
+                DialogInterface.OnClickListener { dialog, which ->dialog.cancel()})
+            builder.show()
             false
         }
     }

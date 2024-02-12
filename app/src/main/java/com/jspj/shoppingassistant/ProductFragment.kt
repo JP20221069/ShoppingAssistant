@@ -99,7 +99,7 @@ class ProductFragment : Fragment() {
 
     private fun UpdateData()
     {
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH:ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.recyclerview;
         // this creates a vertical layout Manager
@@ -132,7 +132,7 @@ class ProductFragment : Fragment() {
     {
         var recyclerView = binding.recyclerview;
         var data:ArrayList<ItemsViewModel> = arrayListOf();
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         lifecycleScope.launch(Dispatchers.Main)
         {
         for(p in StoreList)

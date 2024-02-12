@@ -61,7 +61,7 @@ class ListItemViewFragment : Fragment() {
         var TH: ToastHandler = ToastHandler(requireContext());
         lifecycleScope.launch(Dispatchers.Main)
         {
-            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
             List = ctrl.getList(ctrl.getUID()!!, args.SHLISTID);
             var item = List?.Products?.get(args.ITEMID);
             if (item != null) {
@@ -117,7 +117,7 @@ class ListItemViewFragment : Fragment() {
             }
             if(hasbeenchanged)
             {
-                var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+                var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
                 lifecycleScope.launch(Dispatchers.Main) {
                     ctrl.updateList(List!!);
                     var dir = ListItemViewFragmentDirections.actionListItemViewFragmentToShoppingListFragment(listid);

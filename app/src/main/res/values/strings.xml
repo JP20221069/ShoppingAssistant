@@ -40,6 +40,7 @@
     <string name="ttl_information">Information</string>
     <string name="ttl_manufacturers">Manufacturers</string>
     <string name="ttl_settings">SETTINGS</string>
+    <string name="ttl_error">Error</string>
 
     <string name="menu_title">MAIN MENU</string>
     <string name="menu_lists">MY LISTS</string>
@@ -66,6 +67,8 @@
     <string name="tst_satellitemode">Satellite mode.</string>
     <string name="tst_mapmode">Map mode.</string>
     <string name="tst_restart">Restart the app.</string>
+    <string name="tst_noproductfound">No product found.</string>
+    <string name="tst_deletedlists">Deleted lists.</string>
     <string name="pup_areyousure">Are you sure?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

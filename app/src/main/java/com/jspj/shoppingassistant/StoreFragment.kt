@@ -49,7 +49,7 @@ class StoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController= Navigation.findNavController(view)
-        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
         lifecycleScope.launch(Dispatchers.Main)
         {
             Store=ctrl.getStoreById(args.STOREID)!!;

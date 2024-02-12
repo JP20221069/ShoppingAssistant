@@ -62,7 +62,7 @@ class ListsViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController= Navigation.findNavController(view)
         val TH : ToastHandler = ToastHandler(requireContext());
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         UpdateData();
         UpdateUI();
         binding.ibAddList.setOnClickListener{
@@ -82,7 +82,7 @@ class ListsViewFragment : Fragment() {
                                         ctrl.deleteList(Lists[i]);
                                     }
                                 }.invokeOnCompletion {
-                                    TH.showToast("Deleted lists.", Toast.LENGTH_SHORT);
+                                    TH.showToast(getString(R.string.tst_deletedlists), Toast.LENGTH_SHORT);
                                     UpdateData()
                                     selectmode=false;
                                     UpdateUI()
@@ -121,7 +121,7 @@ class ListsViewFragment : Fragment() {
 
     private fun UpdateData()
     {
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH:ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.rwLists;
         recyclerView.layoutManager = LinearLayoutManager(context)

@@ -59,7 +59,7 @@ class StoresViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController= Navigation.findNavController(view)
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         UpdateData();
         UpdateUI();
 
@@ -83,7 +83,7 @@ class StoresViewFragment : Fragment() {
 
     private fun UpdateData()
     {
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH: ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.rwStores;
         recyclerView.layoutManager = LinearLayoutManager(context)

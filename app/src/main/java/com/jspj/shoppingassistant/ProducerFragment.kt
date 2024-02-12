@@ -99,7 +99,7 @@ class ProducerFragment : Fragment() {
 
     private fun UpdateData()
     {
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController();
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
         var TH: ToastHandler = ToastHandler(requireContext())
         var recyclerView = binding.rwProducts;
         recyclerView.layoutManager = LinearLayoutManager(context)

@@ -15,7 +15,7 @@
     <string name="lbl_repass">Ponovite geslo</string>
     <string name="lbl_store">Trgovina</string>
     <string name="lbl_total">SKUPNO:</string>
-    <string name="lbl_username">Uporabniško ime</string>
+    <string name="lbl_username">Uporab. ime</string>
     <string name="lbl_description">Opis:</string>
     <string name="lbl_manufacturer">PROIZVAJALEC:</string>
     <string name="lbl_barcode">Barkod:</string>
@@ -48,8 +48,10 @@
     <string name="tst_showboth">Prikazani proizvajalci in trgovine.</string>
     <string name="tst_satellitemode">Satelitski pogled.</string>
     <string name="tst_mapmode">Prikaz mape.</string>
+    <string name="tst_noproductfound">Izdelek ni bil najden.</string>
     <string name="pup_areyousure">Ali ste prepričani?</string>
     <string name="ttl_settings">NASTAVITVE</string>
+    <string name="ttl_error">Napaka</string>
     <string name="menu_title">GLAVNI MENI</string>
     <string name="menu_lists">MOJI SEZNAMI</string>
     <string name="menu_stores">TRGOVINE</string>
@@ -59,4 +61,5 @@
     <string name="menu_manufacturers">PROIZVAJALCI</string>
     <string name="menu_exit">IZLAZ</string>
     <string name="tst_restart">Znova zaženite aplikaciju.</string>
+    <string name="tst_deletedlists">Seznami izbrisani.</string>
 </resources>

@@ -48,8 +48,10 @@
     <string name="tst_showboth">Hersteller und Geschäfte gezeigt.</string>
     <string name="tst_satellitemode">Satellit mode.</string>
     <string name="tst_mapmode">Mappe mode.</string>
+    <string name="tst_noproductfound">Produkt nicht gefunden.</string>
     <string name="pup_areyousure">Sind Sie sicher?</string>
     <string name="ttl_settings">EINSTELLUNGEN</string>
+    <string name="ttl_error">Fehler</string>
     <string name="menu_title">HAUPTMENU</string>
     <string name="menu_lists">MEINE KAUFLISTE</string>
     <string name="menu_stores">GESCHÄFTE</string>
@@ -59,4 +61,5 @@
     <string name="menu_manufacturers">HERSTELLER</string>
     <string name="menu_exit">AUSGANG</string>
     <string name="tst_restart">Starten sie das App neu.</string>
+    <string name="tst_deletedlists">Liste wurde entfernt.</string>
 </resources>

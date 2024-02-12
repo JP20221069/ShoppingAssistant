@@ -79,12 +79,12 @@ class FragmentAddProduct : Fragment() {
         np.value=1;
         var recyclerView = binding.rwProducts;
         recyclerView.layoutManager = LinearLayoutManager(context)
-        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
         UpdateData()
 
         binding.btConfirm.setOnClickListener{
 
-            var ctrl:ShoppingAssistantController = ShoppingAssistantController()
+            var ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
             var TH:ToastHandler = ToastHandler(requireContext());
 
 
@@ -144,7 +144,7 @@ class FragmentAddProduct : Fragment() {
     private fun UpdateData() {
 
         var products:List<Product> = ArrayList();
-        val ctrl: ShoppingAssistantController = ShoppingAssistantController()
+        val ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
         lifecycleScope.launch(Dispatchers.Main) {
             products = ctrl.getProducts()
             Products=products;
@@ -188,7 +188,7 @@ class FragmentAddProduct : Fragment() {
 
     private fun SetAdapter(data: ArrayList<ItemsViewModel>) {
         val recyclerView = binding.rwProducts;
-        val ctrl:ShoppingAssistantController = ShoppingAssistantController()
+        val ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         val adapter = CustomAdapter(data)
         adapter.setOnClickListener(object:CustomAdapter.OnClickListener{
             override fun onClick(position: Int, model: ItemsViewModel) {
@@ -212,7 +212,7 @@ class FragmentAddProduct : Fragment() {
 
     /*private fun SimulateScan()
     {
-        var ctrl:ShoppingAssistantController= ShoppingAssistantController();
+        var ctrl:ShoppingAssistantController= ShoppingAssistantController(requireContext());
         var p: Product? =null;
         lifecycleScope.launch(Dispatchers.Main)
         {
@@ -238,17 +238,24 @@ class FragmentAddProduct : Fragment() {
         ScanContract()
     ) { result: ScanIntentResult ->
         if (result.contents != null) {
-            var ctrl: ShoppingAssistantController = ShoppingAssistantController();
+            var ctrl: ShoppingAssistantController = ShoppingAssistantController(requireContext());
             var p: Product? = null;
             lifecycleScope.launch(Dispatchers.Main)
             {
-                p = ctrl.getProductByBarcode(result.contents)!!
+                p = ctrl.getProductByBarcode(result.contents)
             }.invokeOnCompletion {
-                searchCriteria = p?.Name!!;
-                selectedProduct = p;
-                selectedIndex = Products.indexOf(p);
-                scanflag = true;
-                FilterData();
+                if(p==null)
+                {
+                    var TH: ToastHandler = ToastHandler(requireContext());
+                    TH.showToast(getString(R.string.tst_noproductfound), Toast.LENGTH_SHORT);
+                }
+                else {
+                    searchCriteria = p?.Name!!;
+                    selectedProduct = p;
+                    selectedIndex = Products.indexOf(p);
+                    scanflag = true;
+                    FilterData();
+                }
             }
         }
     }

@@ -60,7 +60,7 @@ class AddListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var TH:ToastHandler=ToastHandler(requireContext());
-        var ctrl:ShoppingAssistantController = ShoppingAssistantController();
+        var ctrl:ShoppingAssistantController = ShoppingAssistantController(requireContext());
         navController= Navigation.findNavController(view)
         StoreList= mutableListOf()
         StoreNames = mutableListOf()
